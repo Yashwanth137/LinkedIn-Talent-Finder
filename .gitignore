@@ -9,7 +9,7 @@ venv/
 ENV/
 *.env
 *.log
-backend/myenv/
+
 # React (frontend)
 node_modules/
 build/
