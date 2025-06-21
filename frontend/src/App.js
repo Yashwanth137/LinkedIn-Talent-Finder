@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import LoginForm from "./pages/login.jsx";
+
 function App() {
   const [msg, setMsg] = useState("");
 
@@ -13,10 +15,10 @@ function App() {
     .catch(err => console.error("Fetch error:", err));
 }, []);
 
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>LinkedIn Talent Finder</h1>
-      <p>Backend says: {msg}</p>
+    <div>
+      <LoginForm/>
     </div>
   );
 }
