@@ -40,9 +40,9 @@ npm start
 ```bash
 cd ../backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+venv\Scripts\activate # on windows
 pip install -r requirements.txt
-python app.py  # or uvicorn main:app --reload for FastAPI
+uvicorn main:app --reload  # for FastAPI
 ```
 
 ## 🧪 Testing
