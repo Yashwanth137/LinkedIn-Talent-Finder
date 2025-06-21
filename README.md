@@ -1,4 +1,4 @@
-```markdown
+
 # LinkedIn Talent Finder
 
 A web application to streamline talent discovery using LinkedIn data. Built with a React frontend and a Python backend.
