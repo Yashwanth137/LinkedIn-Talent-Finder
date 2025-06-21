@@ -1,12 +1,18 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = Flask(__name__)
-CORS(app)
 
-@app.route("/")
-def home():
-    return jsonify({"message": "Hello from Flask Backend!"})
+app = FastAPI()
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Or specify your React frontend origin like "http://localhost:5173"
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get('/')
+def welcome():
+    return {'message':'welcome to Linkdin talent finder'}
