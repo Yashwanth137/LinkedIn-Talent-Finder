@@ -12,7 +12,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+@app.get("/")
+def welcome():
+    return {'message': 'welcome to Linkdin talent finder'}
 
 
 
