@@ -8,7 +8,7 @@ A web application to streamline talent discovery using LinkedIn data. Built with
 ```
 LinkedIn-Talent-Finder/
 ├── frontend/        # React app
-├── backend/         # Python backend (Flask/FastAPI/Django)
+├── backend/         # Python backend (FastAPI)
 └── README.md
 ```
 
