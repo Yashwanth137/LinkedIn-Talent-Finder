@@ -16,7 +16,7 @@ app.add_middleware(
 # Route to test MongoDB connection
 @app.get("/")
 async def welcome():
-    user = await db["people"].find_one()
+    user = await db["users"].find_one()
     print(user)
     if user and "_id" in user:
         user["_id"] = str(user["_id"])
