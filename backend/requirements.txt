@@ -2,3 +2,6 @@ fastapi
 uvicorn
 motor
 python-dotenv
+pydantic
+pydantic-settings
+pydantic[email]

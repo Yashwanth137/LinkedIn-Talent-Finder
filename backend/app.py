@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from db import db  # assumes you have db.py handling MongoDB connection
+from routes.auth import router as auth_router
 
 app = FastAPI()
 
-# CORS setup for frontend (React)
+# CORS config
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # React dev server
@@ -13,12 +13,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Route to test MongoDB connection
+# Health check
 @app.get("/")
-async def welcome():
-    user = await db["users"].find_one()
-    print(user)
-    if user and "_id" in user:
-        user["_id"] = str(user["_id"])
+async def root():
+    return {"message": "Linkedin talent finder"}
 
-    return {"message": "MongoDB connected", "sample_user": user}
+# Include auth routes
+app.include_router(auth_router, prefix="/auth")
