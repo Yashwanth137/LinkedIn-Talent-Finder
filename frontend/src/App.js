@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-
-import LoginForm from "./pages/login.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Hero from "./pages/hero.jsx";
+import LoginRegisterPage from "./pages/login"
 
 function App() {
   const [msg, setMsg] = useState("");
@@ -17,9 +18,13 @@ function App() {
 
 
   return (
-    <div>
-      <LoginForm/>
-    </div>
+    <Router> {/* ✅ Wrap everything in Router */}
+      <Routes>
+        <Route path="/" element={<Hero />} />
+        {/* Add more routes here */}
+         <Route path="/login" element={<LoginRegisterPage />} />
+      </Routes>
+    </Router>
   );
 }
 
