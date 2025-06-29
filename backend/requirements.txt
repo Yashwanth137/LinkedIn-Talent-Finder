@@ -5,3 +5,5 @@ python-dotenv
 pydantic
 pydantic-settings
 pydantic[email]
+python-jose[cryptography] 
+bcrypt
