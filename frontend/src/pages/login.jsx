@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const LoginRegisterPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
   const handleSignInClick = () => setIsSignUpActive(false);
   const handleSignUpClick = () => setIsSignUpActive(true);
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log(`${isSignUpActive ? 'Sign Up' : 'Sign In'} form submitted`);
-  };
+
+ const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  const url = isSignUpActive
+    ? "http://localhost:8000/auth/signup"
+    : "http://localhost:8000/auth/login";
+
+  try {
+    const response = await axios.post(url, data);
+    login(response.data.token);
+    navigate("/input");
+  } catch (err) {
+    const backendMessage = err.response?.data?.detail || err.response?.data?.message;
+    alert(backendMessage || "Something went wrong. Try again.");
+  }
+};
+
 
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-[#f6f5f7] font-sans relative overflow-hidden">
@@ -34,19 +56,18 @@ const LoginRegisterPage = () => {
       >
         {/* Sign Up Form */}
         <motion.div
-          className={`absolute top-0 h-full transition-all duration-700 ease-in-out left-0 w-1/2 opacity-0 z-[1] ${
-            isSignUpActive ? 'translate-x-full opacity-100 z-[5]' : ''
-          }`}
+          className={`absolute top-0 h-full transition-all duration-700 ease-in-out left-0 w-1/2 opacity-0 z-[1] ${isSignUpActive ? 'translate-x-full opacity-100 z-[5]' : ''
+            }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: isSignUpActive ? 1 : 0 }}
         >
           <form onSubmit={handleFormSubmit} className="bg-white h-full flex justify-center items-center flex-col px-10 text-center">
             <h1 className="font-extrabold text-3xl mb-2">Create Account</h1>
             <p className="text-sm text-gray-500 mb-4">with your HR credentials</p>
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="text" placeholder="Name" />
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" />
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="tel" placeholder="Mobile" />
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" />
+            <input name="name" className="bg-gray-200 border-none p-3 my-2 w-full" type="text" placeholder="Name" />
+            <input name="email" className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" />
+            <input name="number" className="bg-gray-200 border-none p-3 my-2 w-full" type="tel" placeholder="Mobile" />
+            <input name="password" className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" />
             <button type="submit" className="mt-4 rounded-full border border-[#FF4B2B] bg-[#FF4B2B] text-white text-xs font-bold py-3 px-12 uppercase tracking-wider transition-transform duration-75 ease-in active:scale-95">
               Sign Up
             </button>
@@ -55,15 +76,14 @@ const LoginRegisterPage = () => {
 
         {/* Sign In Form */}
         <motion.div
-          className={`absolute top-0 h-full transition-all duration-700 ease-in-out left-0 w-1/2 z-[2] ${
-            isSignUpActive ? 'translate-x-full' : ''
-          }`}
+          className={`absolute top-0 h-full transition-all duration-700 ease-in-out left-0 w-1/2 z-[2] ${isSignUpActive ? 'translate-x-full' : ''
+            }`}
         >
           <form onSubmit={handleFormSubmit} className="bg-white h-full flex justify-center items-center flex-col px-10 text-center">
             <h1 className="font-extrabold text-4xl mb-2">Sign in</h1>
             <p className="text-sm text-gray-500 mb-4">with your HR credentials</p>
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" />
-            <input className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" />
+            <input name="email" className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" />
+            <input name="password" className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" />
             <a href="#" className="text-sm my-3">Forgot your password?</a>
             <button type="submit" className="rounded-full border border-[#FF4B2B] bg-[#FF4B2B] text-white text-xs font-bold py-3 px-12 uppercase tracking-wider transition-transform duration-75 ease-in active:scale-95">
               Sign In
@@ -73,20 +93,17 @@ const LoginRegisterPage = () => {
 
         {/* Overlay Container */}
         <motion.div
-          className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-700 ease-in-out z-[100] ${
-            isSignUpActive ? '-translate-x-full' : ''
-          }`}
+          className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-700 ease-in-out z-[100] ${isSignUpActive ? '-translate-x-full' : ''
+            }`}
         >
           <motion.div
-            className={`relative bg-gradient-to-r from-[#FF4B2B] to-[#FF416C] text-white h-full w-[200%] transition-transform duration-700 ease-in-out -left-full ${
-              isSignUpActive ? 'translate-x-1/2' : 'translate-x-0'
-            }`}
+            className={`relative bg-gradient-to-r from-[#FF4B2B] to-[#FF416C] text-white h-full w-[200%] transition-transform duration-700 ease-in-out -left-full ${isSignUpActive ? 'translate-x-1/2' : 'translate-x-0'
+              }`}
           >
             {/* Left Panel */}
             <motion.div
-              className={`absolute top-0 h-full w-1/2 flex justify-center items-center flex-col px-10 text-center transition-transform duration-700 ease-in-out ${
-                isSignUpActive ? 'translate-x-0' : '-translate-x-1/5'
-              }`}
+              className={`absolute top-0 h-full w-1/2 flex justify-center items-center flex-col px-10 text-center transition-transform duration-700 ease-in-out ${isSignUpActive ? 'translate-x-0' : '-translate-x-1/5'
+                }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
@@ -100,9 +117,8 @@ const LoginRegisterPage = () => {
 
             {/* Right Panel */}
             <motion.div
-              className={`absolute top-0 h-full w-1/2 flex justify-center items-center flex-col px-10 text-center transition-transform duration-700 ease-in-out right-0 ${
-                isSignUpActive ? 'translate-x-1/5' : 'translate-x-0'
-              }`}
+              className={`absolute top-0 h-full w-1/2 flex justify-center items-center flex-col px-10 text-center transition-transform duration-700 ease-in-out right-0 ${isSignUpActive ? 'translate-x-1/5' : 'translate-x-0'
+                }`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}

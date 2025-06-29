@@ -1,36 +1,36 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from db import db
 from schemas import LoginRequest, SignUpRequest
+from utils.jwt import create_access_token
+import bcrypt
 
 router = APIRouter()
-
-@router.post("/login")
-async def login(state: LoginRequest):
-    user = await db["users"].find_one({"email": state.email})
-
-    if not user or user["password"] != state.password:
-        return JSONResponse(content={"message": "Invalid email or password"}, status_code=401)
-
-    user["_id"] = str(user["_id"])
-    return JSONResponse(content={"message": "Login successful", "user": user}, status_code=200)
 
 @router.post("/signup")
 async def signup(state: SignUpRequest):
     user = await db["users"].find_one({"email": state.email})
-
     if user:
-        return JSONResponse(content={"message": "Email already exists"}, status_code=401)
+        raise HTTPException(status_code=400, detail="Email already registered")
 
+    hashed_pw = bcrypt.hashpw(state.password.encode(), bcrypt.gensalt()).decode()
     user_data = {
         "name": state.name,
         "email": state.email,
         "number": state.number,
-        "password": state.password
+        "password": hashed_pw
     }
 
     result = await db["users"].insert_one(user_data)
-    user_data["_id"] = str(result.inserted_id)
-    user_data.pop("password")
+    token = create_access_token({"email": state.email})
 
-    return JSONResponse(content={"message": "User created successfully", "user": user_data}, status_code=201)
+    return {"message": "Signup successful", "token": token}
+
+@router.post("/login")
+async def login(state: LoginRequest):
+    user = await db["users"].find_one({"email": state.email})
+    if not user or not bcrypt.checkpw(state.password.encode(), user["password"].encode()):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    token = create_access_token({"email": state.email})
+    return {"message": "Login successful", "token": token}
