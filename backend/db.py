@@ -1,5 +1,8 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 from config import settings
 
-client = AsyncIOMotorClient(settings.mongo_uri)
-db = client[settings.database_name]
+engine = create_engine(settings.postgres_url)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
