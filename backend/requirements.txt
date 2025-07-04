@@ -1,9 +1,14 @@
 fastapi
 uvicorn
-motor
 python-dotenv
 pydantic
 pydantic-settings
 pydantic[email]
 python-jose[cryptography] 
 bcrypt
+sqlalchemy 
+psycopg2-binary 
+qdrant-client 
+sentence-transformers 
+pymupdf
+python-docx
