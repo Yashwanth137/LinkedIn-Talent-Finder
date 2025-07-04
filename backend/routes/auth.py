@@ -1,36 +1,52 @@
-from fastapi import APIRouter
-from fastapi.responses import JSONResponse
-from db import db
+# routes/auth.py
+
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.orm import Session
 from schemas import LoginRequest, SignUpRequest
+from utils.jwt import create_access_token
+from models import User
+from db import SessionLocal
+import bcrypt
 
 router = APIRouter()
 
-@router.post("/login")
-async def login(state: LoginRequest):
-    user = await db["users"].find_one({"email": state.email})
-
-    if not user or user["password"] != state.password:
-        return JSONResponse(content={"message": "Invalid email or password"}, status_code=401)
-
-    user["_id"] = str(user["_id"])
-    return JSONResponse(content={"message": "Login successful", "user": user}, status_code=200)
+# Dependency to get DB session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @router.post("/signup")
-async def signup(state: SignUpRequest):
-    user = await db["users"].find_one({"email": state.email})
+def signup(state: SignUpRequest, db: Session = Depends(get_db)):
+    # Check if email already exists
+    existing_user = db.query(User).filter(User.email == state.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
 
-    if user:
-        return JSONResponse(content={"message": "Email already exists"}, status_code=401)
+    # Hash password and create user
+    hashed_pw = bcrypt.hashpw(state.password.encode(), bcrypt.gensalt()).decode()
+    new_user = User(
+        name=state.name,
+        email=state.email,
+        number=state.number,
+        password=hashed_pw
+    )
 
-    user_data = {
-        "name": state.name,
-        "email": state.email,
-        "number": state.number,
-        "password": state.password
-    }
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
 
-    result = await db["users"].insert_one(user_data)
-    user_data["_id"] = str(result.inserted_id)
-    user_data.pop("password")
+    token = create_access_token({"email": state.email})
+    return {"message": "Signup successful", "token": token}
 
-    return JSONResponse(content={"message": "User created successfully", "user": user_data}, status_code=201)
+@router.post("/login")
+def login(state: LoginRequest, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == state.email).first()
+
+    if not user or not bcrypt.checkpw(state.password.encode(), user.password.encode()):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    token = create_access_token({"email": state.email})
+    return {"message": "Login successful", "token": token}
