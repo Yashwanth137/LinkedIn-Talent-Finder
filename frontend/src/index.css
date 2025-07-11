@@ -17,3 +17,16 @@ code {
     monospace;
 }
 
+@layer utilities {
+  .animate-dropdown {
+    @apply opacity-0 scale-95;
+    animation: dropdown-fade 0.2s ease-out forwards;
+  }
+
+  @keyframes dropdown-fade {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

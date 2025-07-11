@@ -1,9 +1,10 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Hero from "./pages/hero.jsx";
-import LoginRegisterPage from "./pages/login.jsx"; 
-import InputPage from "./pages/input.jsx";
+import LoginRegisterPage from "./pages/login.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+import TabLayout from "./pages/TabLayout.jsx";
+import ProfilePage from "./pages/profilepage.jsx";
 import { AuthProvider } from "./pages/AuthContext.jsx";
 
 function App() {
@@ -11,35 +12,33 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:8000/")
-      .then(res => res.json())
-      .then(data => {
-        console.log("Fetched data:", data);
-        // The msg state isn't used in the UI, but we'll leave the fetch logic
+      .then((res) => res.json())
+      .then((data) => {
         setMsg(JSON.stringify(data.sample_user, null, 2));
       })
-      .catch(err => console.error("Fetch error:", err));
+      .catch((err) => console.error("Fetch error:", err));
   }, []);
-
 
   return (
     <Router>
-      {/* ✅ Wrap all routes with AuthProvider.
-        This makes the auth context (login, logout, token) available
-        to all components rendered by these routes.
-      */}
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/login" element={<LoginRegisterPage />} />
-          
-          {/* The ProtectedRoute component will now have access to the auth context
-            to determine if a user is authenticated.
-          */}
-          <Route path="/input" element={
-            <ProtectedRoute>
-              <InputPage />
-            </ProtectedRoute>
-          } />
+
+          <Route
+            path="/app"
+            element={
+              <ProtectedRoute>
+                <TabLayout />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ✅ Optional: Redirect old "/input" path to new "/app" */}
+          <Route path="/input" element={<Navigate to="/app" replace />} />
+
+          <Route path="/profile/:id" element={<ProfilePage />} />
         </Routes>
       </AuthProvider>
     </Router>

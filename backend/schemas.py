@@ -1,5 +1,3 @@
-# schemas.py
-
 from pydantic import BaseModel, EmailStr
 
 class SignUpRequest(BaseModel):
@@ -18,4 +16,5 @@ class ResumeOut(BaseModel):
         from_attributes = True
         
 class JobDescriptionInput(BaseModel):
-    description: str
+    description: str  
+    top_k: int  

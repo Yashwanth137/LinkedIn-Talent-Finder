@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
+from config import settings
 
-SECRET_KEY = "your_secret_key_here"
+SECRET_KEY = settings.secret_key
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 1 day
 
@@ -9,10 +11,16 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded
+
 
 def verify_token(token: str):
     try:
-        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-    except JWTError:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+ #       print("✅ Decoded token:", decoded)
+        return decoded
+    except JWTError as e:
+        print("❌ Token verification failed:", e)
         return None
+

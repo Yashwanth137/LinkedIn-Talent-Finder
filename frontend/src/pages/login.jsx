@@ -5,32 +5,49 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const LoginRegisterPage = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate   = useNavigate();
+  const { login }  = useAuth();                // from AuthContext
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
-  const handleSignInClick = () => setIsSignUpActive(false);
-  const handleSignUpClick = () => setIsSignUpActive(true);
+  const handleSignInClick  = () => setIsSignUpActive(false);
+  const handleSignUpClick  = () => setIsSignUpActive(true);
 
- const handleFormSubmit = async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
+  /** -------------------------------------------------
+   *  Handle submit for BOTH “Sign In” and “Sign Up”
+   *  ------------------------------------------------- */
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data     = Object.fromEntries(formData.entries());
 
-  const url = isSignUpActive
-    ? "http://localhost:8000/auth/signup"
-    : "http://localhost:8000/auth/login";
+    /* Choose endpoint */
+    const url = isSignUpActive
+      ? 'http://localhost:8000/auth/signup'
+      : 'http://localhost:8000/auth/login';
 
-  try {
-    const response = await axios.post(url, data);
-    login(response.data.token);
-    navigate("/input");
-  } catch (err) {
-    const backendMessage = err.response?.data?.detail || err.response?.data?.message;
-    alert(backendMessage || "Something went wrong. Try again.");
-  }
-};
+   try {
+  console.log("🔄 Sending login/signup request to:", url);
+  const res = await axios.post(url, data);
+  console.log("✅ Received response:", res.data);
+
+  const token = res.data.token;
+  if (!token) throw new Error("❌ No token returned from backend");
+
+  console.log("🔐 Saving token:", token);
+  localStorage.setItem("token", token);
+
+  login(token);
+  navigate("/app");
+} catch (err) {
+  console.error("❌ Error during auth:", err);
+  const msg =
+    err.response?.data?.detail ||
+    err.response?.data?.message ||
+    "Something went wrong. Try again.";
+  alert(msg);
+}
+
+  };
 
 
   return (

@@ -1,0 +1,181 @@
+BORIS GALAEV
+E-mail: galaevb@yahoo.com
+New Jersey, New York City area.
+Phone#  (917) 477 3818
+Cell# (757) 285 0969
+OBJECTIVE
+Highly qualified with more than 16 years of experience in developing of various applications for such business areas as accounting, financial analysis, banking, insurance, mortgage, securities, GIS, state projects using Java/J2EE, C/C++ for Oracle, DB2, MySQL, MSSQL and Sybase databases for different platforms – AIX, Solaris, MS Windows, Linux. 
+Now I am looking to make a significant contribution within similar business areas.
+
+SUMMARY OF TECHNICAL SKILLS
+Programming languages: Java, C/C++, C#, JavaScript, SQL, PL/SQL, PhP:
+- Java/J2EE - 10 years of experience 
+        Technologies: core Java(12 years), J2EE (10 years), EJB(5 years), JDBC (10 years), JSP/Servlets(8 years), JMS(5 years), RMI(4 years) , Web Services(7 years)- Soap(5y),Restful(2y), JAXB(1 year), JAXP(3 years), SWT(2), Swing(3), JUnit(3), Struts(3), Struts2(1) JSF(3), Spring Framework(6 years), Hibernate(3)/Toplink(1)/iBatis(6 months)/JPA(1 year), Ant, Maven
+        Platforms: IBM WebSphere(4), Weblogic Server/Portal(5), Oracle 10gAS(2), JBoss(3), Apache/Tomcat(7 years), open source libraries (Axis, POI, iText, and so on)
+        IDE: Eclipse, Websphere Application Developer, RAD, JDeveloper, Sun Studio Creator, Sun  Enterprise Studio, NetBeans,IntelliJ
+- C/C++: 10 years in different platforms. 
+- ASP: 2 years MS Visual Studio;
+- C#.: 5 years MS.Net. IDE: MS Visual Studio.NET;
+- PhP: 2 years;
+- Perl: 1 year;
+- Python: 1 years with Django/Quarz;
+Databases: Oracle, MSSQL Server, DB2, MySQL, Sybase, PostgreSQL, Cassandra – programming, Java backend, ETL, conversion processes, Data Warehousing.
+- Oracle (7.3...12c),PL/SQL - 12 years of experience (OCP DBA Oracle 8i,10g) - planning and developing databases, creating indexes, stored procedures in PL/SQL, triggers, backup/restore, optimizing &  tuning database operations, clustering and queuing. 
+        Tools: TOAD, SQL*Navigator, PL/SQL developer, SQL developer, Oracle Forms/Reports,
+- MSSQL 6.5...2012, T-SQL - 5 years of experience (MCDBA for MSSQL 2000), 
+- UDB DB2 - 5 years: 
+- MySQL- 3 years, 
+- Sybase - 2 years,
+- Teradata- 1 years,
+- PostgreSQL/Netezza – 6 months,
+- Cassandra - 6 months,
+- Mongodb – 6 months. 
+Database Modeling: ERWIN, Open Modelsphere.
+Web technologies - JavaScript/CSS/DHML(6 years), HTML,  XML/XSLT(6 years), Ajax (4 years), Dojo (2 year), GWT/GXT(3 years), scriptuculous(6 month), jQuery(2 years).
+Reporting/BO: Crystal Reports 7,8.5/10/XI (6 years), other Business Objects tools including Xselsius (1 year), Jaspe (1 year),
+Actuate (BIRT) (1 year), Cognos (1 year), SAS.
+Modeling: UML, Rational Rose, MS Visio, 
+Content-management systems - Filenet P8 (1 year), Documentum (1 year), Autonomy/Interwoven(6 months).
+GIS applications - ESRI ArcGIS(1 year), Smallworld (1 year).
+Numerical libraries/tools: Matlab (2 years), Mathematica, AMPL, Numerical Algorithm Group (NAG). 
+CVS: ClearCase/ClearQuest(3 years), StarTeam(2 years), Harvest(1 year), MS SourceSafe(more than 5 years), Subversion(4 years)
+Scripting: PHP (2 year), Python(1 year), ksh (2 years), bash 
+Platforms: AIX (3 years), Solaris (4 years), Windows (many years), Linux (5 years), Mainframe.
+
+CERTIFICATIONS
+OCP12c (Oracle Database 12c Administrator Certified Professional) -27Feb2016
+OCP10g (Oracle Certified Professional-DBA Oracle10g)
+SCDJWS (Sun Certified Developer for Java Web Services).
+SCJA (1st part) – passed exam 310-051 (Sun Certified Java Architect, part I).
+SCBCD (Sun Certified Business Component Developer) .
+SCWCD (Sun Certified Web Component Developer, for Java 2 Platform Enterprise Ed 1.4).
+SCJP (Sun Certified Java Programmer, for the Java 2 platform 1.2).
+MCSD.Net (Microsoft Certified Solution Developer, C#).
+MCDBA(Microsoft Certified Database Administrator, MSSQL2000).
+OCP8i (Oracle Certified Professional-DBA for Oracle8i) .
+Previously certified in Microsoft technologies -MCSD/VC++, MCA(Microsoft Certied Architect, Solutions).
+
+PROFESSIONAL EXPERIENCE
+
+Bank of America/Merrill Lynch (New York City, NY)                                           (December 2015 – May 2016)
+Java/AngularJS Developer
+Design and Development of Java/Python Web cloud application for automation of installation services
+Design and developing (POC, Proof of concept) java web/restful applications using Jersey API/Grizzly/Play framework Restful API, for interacting with AngularJS/Bootstrap based web client, making so called “Middleware As service application” - MWaaS Web Portal, which automates installation of Web/App servers of different types of (like Apache Tomcat 7/8, HTTP Apache, JBoss, Weblogic and WebSphere application servers). 
+Creating and testing of processing of asynchronous Restful calls using multithreading features Java 7/8 (ForkJoinPool, CompletableFuture, Streams and so on).
+Configuration of Pools of Virtual Machines, managing instances, user authentication, developing shell scripts for BMC BladeLogic Automation Suite/Puppet, using Spring (Core, MVC, Batch), Java 8, JPA/Hibernate for MSSQL 2008 database. 
+Performing Unit and Integration testing using Node.js, JUnit, Karma, Jasmine testing tools, GWT/GXT (added with RestyGWT).
+Tools: BladeLogic/Puppet, TOAD for SQL Server, Eclipse, Spring, Subversion, Linux, Scala, Java 8. 
+Databases: MSSQL Server 2008.
+Platforms:  Windows/Linux.
+
+BNP Paribas (Jersey City, NJ)                                                                (July 2015 – November 2015)
+Java/Sybase Developer
+Development/support of Java core application for securities lending
+Solving issues/defects, correcting java program’s errors, creating/changing queries/stored procedures in T-SQL for Sybase ASE 15, developing korn shell and Perl scripts, creating compliance reports, interacting with other external(Calypso, Loanet, Sunguard) and internal trading systems, preparing  UAT testing/production releases, production support using Java 1.7(multithreading, concurrencyUtil package), Perl, Spring, Sybase ASE database.
+Tools: Sybase ASE, Aqua Data Studio, Eclipse, Subversion, Unix tools. 
+Databases: Sybase ASE 15.
+Platforms: Unix, Windows.
+
+Ricoh (Pine Brook, NJ)                                                                        (November 2014 – June 2015)
+Core Java/C++/C# Developer
+Development of universal scaner driver server components in Java/C++/C#
+Created Java components for Universal driver for company's devices using Eclipse, Maven , Microsoft Visual Studio .Net 2013, Com API, console/dll C# programs, tools COM/OLE Viewer, midl.exe, Dll, Java/COM API (JNI, JNA, J-integra, ArcObjects from ArcGIS Esri, Jacob, j-interop,JNAerator) to connect Java client (scaner driver) with CMS like Autonomy - Interwoven, Documentum, other legacy applications using Microsoft COM/DCOM model and open source library Jacob(Java COM Bridge). 
+Developing C# applications for Autonomy/Interwoven WorkSite application  using MS Visual Studio 2013 and converting them to core Java applications. Working with .idl files and directly with Windows registry, creating native libraries, components for Node.js/java connections to legacy systems. 
+Developing plugins, UI components for server and emulator based on Flex/Javascript, SWT.
+Developing C#/Java calls for Java-plugin for laserfiche content-management system/Ricoh interface.
+Platforms: Windows.
+
+CGFNS (Philadelphia, PA)                                                                      (August 2014 – September 2014)
+Java/JEE Sr Developer 
+Development of Java/J2ee Web application
+Created Java batch program for providing information (xml)/creating reports(pdf) using Tomcat, Spring Tool Suite, 
+Spring Batch, Spring Security, Hibernate/JPA, iText, Oracle BI Publisher and programs (Java Advanced Imaging API) to convert .tiff files into Pdf, using Java7, Oracle 12c. Maven.
+Developed Web Portal using Spring Tool Suite, Spring MVC, Spring Security, jQuery, Html5, Css3, javascript, Oracle 12c, responsive web design, Endeca, Solr/Lucene.
+Developing PhP modules for LAMP environment for Web application.
+Databases: Oracle 12c, Mongodb.
+Platforms: Linix.
+
+
+Hewlett-Packard (Trenton, NJ)                                                                        (March 2014 – July 2014)
+Java/JEE Sr Developer/Team Lead
+Development of Java/J2ee Web application for New Jersey State client(MVC)
+Solving issues/defects, correcting java program’s errors, preparing  Web application for UAT testing/production release, production support using Java 1.6/Jee, JSF/Richfaces, EJB3,  Spring MVC, Spring WebFlow, Hibernate/JPA,  IBM Websphere server,
+Tools: RAD,  IBM Clearcase, Clearquest, IBM Business Process Manager, IBM Websphere ILOG JRules. 
+POC research on using of CA Datacom jdbc driver to retrieve data on mainframes using Java modules.  
+Databases: Oracle11g, CA Datacom.
+Platforms: Unix, Windows, Mainframe.
+Scrum, Agile.
+
+Deutsche Bank (Jersey City, NJ)						                             (August 2013 - March 2014)
+Sr.Web developer/analyst
+Development of Java/J2EE Web applications for database automation portal
+Developing Java Web applications for uploading/maintaining information for Oracle databases automation portal, using Java 1.6/J2ee, restful web services (Jersey API), SOAP web services, JPA/Hibernate with encryption of data in database, cryptographic packages -  Java Crypto API, Oracle based encryption, OWASP/ Jasypt API. Creating Web apps using JSP, Spring MVC, PhP, jQuery, AngularJS, GWT on Tomcat/Apache server.
+Databases: Oracle11g.
+Platforms: Linux SUSE, Windows.
+
+Bank of America/Merrill Lynch (Jersey City, NJ)                                                       (April 2012 - July 2013)
+Application developer
+Development of Java/J2EE Web applications for operational risk web portal
+Developing Java Web applications for performing  loads and administration of uploading subsystem of bank risk management datawarehouse and Weblogic portal,  using Java/J2ee, JSP/JSF technology, jQuery, extJs, Hibernate, Weblogic, Oracle. 
+Migration of the applications (web and batch) from Weblogic 9/Oracle 10g to Weblogic/Oracle 11g including Java 1.6/PL/SQL modules, Autosys batch jobs.
+Also taking part in developing version of portal for  Python/Quartz, Django, NoSQL (Cassandra/Mongodb), Endeca, Solr/Lucene.
+Developing reports – replacing Actuate(BIRT), Jasper reports with Cognos and developing custom Cognos10 reports with Cognos SDK(Java API). 
+Supporting ETL transformations in datawarehouse using Informatica and core Java API modules.
+Migration and remediation of Java web application developed using Websphere application server, iBatis, Mule, EJBs to be used with Weblogic server/portal. 
+Databases: Oracle10g/11g.
+Platforms: Unix/Linux, Windows.
+
+Credit Suisse(New York City, NY).			                                             (October 2011 - March 2012)
+Java/Oracle developer
+Development of Core Java/J2EE applications for global data reference hub
+Developed Java 1.6 modules to connect Cisco Enterprise Policy Management System (CEPM) for the purpose of handling entitlements for Webservices security using Java reflection package.
+Created Web Services (soap/wsdl) for providing information and applying CEPM entitlements.
+Enhancing and extending of Core Java based multithreading ETL tool for distributed loading XML data into Oracle11g database using JPA/Eclipselink (Weblogic), JAXB. 
+Development of Java/Web applications using Richfaces, Hibernate, Ilog Jrules/Drools, Weblogic, Oracle 11g.
+Configuring and running batch jobs using BMC Control-M server/job distribution system, developing shell scripts  for these tasks. 
+Developed SQL scripts to produce extracts/reports for providing information directly from Oracle database.
+Databases: Oracle10g/11g
+Platforms: Unix/Linux, Windows.
+Agile methodology
+
+Amstock.(Brooklyn, NY)						                                     (April  2011 to Sep 2011)
+Java/J2EE developer
+Development of Java/Web applications using Struts, jQuery, JMS, IBM MQ, Message-driven beans, JBoss ESB for stock transfer and registrar services on JBoss SOA platform... 
+Configuring MQ-bridges between mainframe and Web server using IBM MQ and converting data using Java, JMS, creating Message-Driven Beans. 
+Integrating JBoss with IBM MQ, other messaging systems (ftp, e-mail) using JBoss ESB on JBoss SOA platform,jBPM...
+Developing Java Web application using JMS , MDB,  JSP, Struts/jQuery/extJs, Castor, FreeMarker for converting non validated records from different database tables into XML records  in DB2 database,  providing universal JSP pages for searching, viewing and repairing these data, creating business reports, using xml/xsd/xslt configuration files, JAXB.
+Developing interface modules for connection between Java Web application (jsp, servlets, javascript) and legacy applications on Natural/Adabas (Software AG webMethods Entirex).
+Conversion of data from Lotus Notes (Domino) applications into Web-based Java application on Oracle database using open source Domingo API, creating jsp pages using jQuery table  components, rich text editor, extJs grids.
+Upgrading Java Web application based on Spring/Struts/Tiles/iBatis on IBM Websphere platform into Java Web application on newest Jboss AS SOA platform. 
+Integrating Captiva OCR system with existing application registering customers, using batch(Spring Quarz) or message-driven components (IBM MQ), DB2 stored procedures.
+Developing Java-based document management system providing saving/retrieving  in/from repositories (Db2 database based) all types of inbound information using Struts, JBoss, business rules, BIRT.
+Integrating different Java Web applications using Mule ESB technology.
+Databases: DB2, MySQL, Oracle, MSSQL, Sybase 
+Platforms: Windows, Linux.
+
+FINRA  (New York, NY) 						                                        [Nov.2010 to March 2011)
+Java/GWT developer
+Development of GWT Web auditing applications about securities
+       Migrated BRIO applications for securities reporting and analytics to J2EE Web applications using GWT/ExtGWT, Spring MVC, Hibernate, JavaScript, AJAX/JSON, HTML/DHTML, XML Cognos8, Oracle Weblogic Server, Unix scripts, BIRT.
+       Developed auditing Web applications about applying rules on stock market, provided depth guidelines, storing information about tso, and about other aspects of stock market behavior/analysis using GWT/extGWT, Hibernate on Oracle/Netezza databases..
+Databases: Oracle 10g/11g, PostgreSQL/Netezza 
+Platforms: Windows, Solaris 
+Agile methodology
+
+Federal Reserve Bank of NY (New York, NY) 		  						[Jun.2010 to Oct.2010]
+Java/J2ee developer
+Development of Java web applications based on open source frameworks
+       Developed J2EE Web application for banking applications using Spring framework, Hibernate, Struts2, Tiles, JavaScript, AJAX/JSON (script.aculo.us, dojo, jQuery), Freemarker, JSP, HTML/DHTML, XML, Ant, Websphere, MS SQL 2005. 
+       Developed extended existing intranet/internet Web application for tracking business events which is using Struts2/Hibernate/Ajax, Freemarker on MSSQL Server.
+Databases: MS SQL 2005 Platforms: Windows
+
+
+PERSONAL SECTION
+EDUCATION
+M.S. in Nuclear Physics (Moscow Engineering Physics Institute: Applied mathematical physics). 
+COMMUNICATION SKILLS
+Good communication skills, oral and written, the IELTS test - 6.5 in average.
+STATUS
+US citizen
+
+
