@@ -2,14 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from db import Base, engine
 from utils.qdrant_client import setup_qdrant
-from utils.matcher import insert_vector, search_vector
+from routes import resumes
+from routes.auth import router as auth_router
 
 app = FastAPI()
 
 # ✅ Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace with your frontend URL in production
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,10 +28,5 @@ def startup_event():
 def read_root():
     return {"message": "LinkedIn Talent Finder API is running 🚀"}
 
-# ✅ Register routers
-from routes.auth import router as auth_router
-#from routes.resumes import router as resume_router
-
 app.include_router(auth_router, prefix="/auth")
-#app.include_router(resume_router, prefix="/resumes")
-
+app.include_router(resumes.router)

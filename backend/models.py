@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Float, ARRAY
 from db import Base
 
 class User(Base):
@@ -12,10 +12,14 @@ class User(Base):
 
 
 class Resume(Base):
-    __tablename__ = "resumes"
+    __tablename__ = "resumes_llm"
 
     id = Column(Integer, primary_key=True, index=True)
-    uuid = Column(String, unique=True, index=True)
+    document_id = Column(String, unique=True, index=True)
     name = Column(String)
     email = Column(String)
-    text = Column(Text)
+    mobile_number = Column(String)
+    years_experience = Column(Float)
+    skills = Column(ARRAY(Text))         # PostgreSQL array of text
+    prev_roles = Column(ARRAY(Text))     # PostgreSQL array of text
+    location = Column(Text)

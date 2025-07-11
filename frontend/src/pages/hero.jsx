@@ -9,7 +9,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
 import { Link as ScrollLink } from "react-scroll";
-import AnimatedBrain from "../assets/AnimatedBrain"; // Assuming you have an animated brain component
+import AnimatedBrain from "../assets/AnimatedBrain";
 import GlassBackgroundLayout from "./GlassBackground";
 
 export default function Hero() {
@@ -56,8 +56,8 @@ export default function Hero() {
     },
 
     {
-      title: "LinkedIn Profile Search",
-      desc: "Search real-time LinkedIn candidates via API integration.",
+      title: "Vast database Search",
+      desc: "Search real-time candidates via API integration.",
       icon: <MagnifyingGlassIcon className="h-6 w-6 text-purple-600" />,
     },
     {
@@ -75,44 +75,17 @@ export default function Hero() {
   return (
     <GlassBackgroundLayout>
       <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
-        {/* Animated floating particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          {Array.from({ length: 20 }, (_, i) => {
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            const delay = Math.random() * 2;
-            const duration = 3 + Math.random() * 2;
-            return (
-              <div
-                key={i}
-                className="absolute w-2 h-2 bg-blue-200 rounded-full opacity-30"
-                style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  animation: `float ${duration}s ease-in-out infinite ${delay}s`,
-                }}
-              />
-            );
-          })}
-        </div>
-        <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-      `}</style>
-
         {/* HERO SECTION */}
         <div className="relative z-10" id="hero">
           <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full px-4 sm:px-6 md:px-10">
-            <div className="max-w-7xl w-full mx-auto bg-white/70 backdrop-blur-lg border border-gray-200 rounded-full px-8 py-4 flex items-center justify-between shadow-md">
+            <div className="max-w-7xl w-full mx-auto bg-white/90 border border-gray-200 rounded-full px-8 py-4 flex items-center justify-between shadow-md">
               <motion.h2
                 className="text-lg sm:text-xl font-bold text-purple-600"
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                LinkedIn TalentFinder
+                Talent Finder
               </motion.h2>
 
               <motion.div
@@ -136,7 +109,6 @@ export default function Hero() {
               </motion.div>
             </div>
           </header>
-
 
           <motion.section
             variants={containerVariants}
@@ -165,9 +137,8 @@ export default function Hero() {
             <div className="absolute bottom-20 right-20 w-40 h-40 bg-white/20 backdrop-blur-md rounded-full shadow-lg z-[-1]"></div>
             <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-white/10 backdrop-blur-sm rounded-full transform -translate-x-1/2 -translate-y-1/2 z-[-1]"></div>
 
-
             {/* Left - Text Content */}
-            <div className="text-center md:text-left md:w-1/2 md:pl-6 lg:pl-24">
+            <div className="text-center md:text-left md:w-full lg:w-1/2 md:pl-6 lg:pl-24">
               <motion.div
                 variants={itemVariants}
                 className="inline-block mb-6 px-6 py-2 rounded-xl text-sm font-semibold bg-white text-blue-600 shadow-md"
@@ -176,11 +147,12 @@ export default function Hero() {
               </motion.div>
               <motion.h1
                 variants={itemVariants}
-                className="text-4xl md:text-6xl font-extrabold leading-tight mb-4"
+                className="text-4xl font-extrabold leading-tight mb-4"
               >
-                <span className="whitespace-nowrap">Streamline your recruitment</span>
-                <br className="hidden md:block" />
-                <span className="whitespace-nowrap">with AI Powered Tools.</span>
+                {/* Always force two lines on desktop */}
+                <span class="block text-4xl sm:text-5xl lg:text-6xl font-extrabold">Streamline your</span>
+                <span class="block text-4xl sm:text-5xl lg:text-6xl font-extrabold">recruitment with AI</span>
+                <span class="block text-4xl sm:text-5xl lg:text-6xl font-extrabold">Powered Tools.</span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
@@ -214,7 +186,7 @@ export default function Hero() {
             {/* Right - Brain Animation */}
             <motion.div
               variants={itemVariants}
-              className="w-full md:w-1/2 max-w-sm flex justify-center md:pr-24"
+              className="w-full md:w-1/2 **max-w-md** flex justify-center md:pr-20"
             >
               <AnimatedBrain />
             </motion.div>

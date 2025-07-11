@@ -1,56 +1,82 @@
-# routes/resumes.py
-'''
-from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel
+from typing import List
 from sqlalchemy.orm import Session
-from db import SessionLocal
+from services.serach_batch import run_search_pipeline
+from db import SessionLocal, get_db
 from models import Resume
-from schemas import ResumeOut, JobDescriptionInput
-from services.parser import extract_text_from_pdf
-from services.embedder import generate_embedding
-from utils.matcher import insert_vector, search_similar
-import uuid
+import traceback
+from fastapi.responses import JSONResponse
+from fastapi import Path
 
 router = APIRouter()
 
-def get_db():
-    db = SessionLocal()
+class SearchRequest(BaseModel):
+    job_description: str
+    top_k: int = 10
+
+class CandidateProfile(BaseModel):
+    document_id: str
+    name: str
+    email: str
+    mobile_number: str
+    years_experience: float
+    skills: List[str]
+    prev_roles: List[str]
+    location: str
+    score: float
+
+    class Config:
+        orm_mode = True
+
+@router.post("/search", response_model=List[CandidateProfile])
+async def search_resumes(request: SearchRequest, db: Session = Depends(get_db)):
     try:
-        yield db
-    finally:
-        db.close()
+        results = run_search_pipeline(request.job_description, request.top_k)
 
-@router.post("/upload", response_model=dict)
-async def upload_resume(file: UploadFile = File(...), db: Session = Depends(get_db)):
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+        print("Search results:", results)
 
-    content = await file.read()
-    text = extract_text_from_pdf(content)
-    embedding = generate_embedding(text)
-    resume_uuid = str(uuid.uuid4())
+        profiles = []
+        for r in results:
+            print("Looking for profile with document_id:", r.id)  # changed from r.document_id
+            profile = db.query(Resume).filter(Resume.document_id == r.id).first()
+            if not profile:
+                print("Profile not found for:", r.id)
+            else:
+                profiles.append(CandidateProfile(
+                    document_id=r.id,  # changed from r.document_id
+                    name=profile.name,
+                    email=profile.email,
+                    mobile_number=profile.mobile_number,
+                    years_experience=profile.years_experience,
+                    skills=profile.skills,
+                    prev_roles=profile.prev_roles,
+                    location=profile.location,
+                    score=round(r.score, 2)  # already in percentage
+                ))
 
-    resume = Resume(uuid=resume_uuid, name="", email="", text=text)
-    db.add(resume)
-    db.commit()
-    db.refresh(resume)
 
-    insert_vector(resume.id, embedding, {"uuid": resume_uuid})
+        return profiles
 
-    return {"message": "Resume uploaded", "id": resume.id}
+    except Exception as e:
+        print("Error occurred:")
+        traceback.print_exc()
+        return JSONResponse(status_code=500, content={"detail": str(e)})
 
-@router.post("/search", response_model=List[ResumeOut])
-async def search_resumes(job: JobDescriptionInput, db: Session = Depends(get_db)):
-    vector = generate_embedding(job.description)
-    ids = search_similar(vector)
-
-    results = db.query(Resume).filter(Resume.id.in_(ids)).all()
-    return [
-        ResumeOut(
-            id=r.id,
-            uuid=r.uuid,
-            name=r.name,
-            email=r.email,
-            text_snippet=r.text[:200]
-        ) for r in results
-    ]
-'''
+@router.get("/profile/{document_id}", response_model=CandidateProfile)
+async def get_profile(document_id: str, db: Session = Depends(get_db)):
+    profile = db.query(Resume).filter(Resume.document_id == document_id).first()
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    
+    return CandidateProfile(
+        document_id=profile.document_id,
+        name=profile.name,
+        email=profile.email,
+        mobile_number=profile.mobile_number,
+        years_experience=profile.years_experience,
+        skills=profile.skills,
+        prev_roles=profile.prev_roles,
+        location=profile.location,
+        score=0  # Default, or you can pass it from search if needed
+    )
