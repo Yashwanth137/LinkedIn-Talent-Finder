@@ -12,3 +12,12 @@ qdrant-client
 sentence-transformers 
 pymupdf
 python-docx
+
+ollama
+tqdm
+pdfplumber
+
+langchain
+langchain-core
+langchain-ollama
+langchain-community  

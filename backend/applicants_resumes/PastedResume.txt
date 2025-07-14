@@ -1,0 +1,196 @@
+     
+
+
+
+                                                                                  SRINIVAS DASARI
+                                                                            Srini.Dasari123@Gmail.com
+                                                                                         916-396-9139
+                                                                                                                                           
+SUMMARY:
+	 
+•	Experienced with earned reputation for meeting demanding deadlines and delivering critical solutions on various levels of Quality Assurance for Client/Server and Web based applications 
+•	Excellent testing experience in all phases and stages of testing with good working knowledge of testing disciplines, tasks, resources, scheduling and Test Methodologies -Agile and Waterfall 
+•	Worked individually, as well as in a team environment, to achieve quality project goals 
+•	Expertise in preparing Test Strategy, Test Plan, Test Summary Reports, Test Cases and Test Scripts for manual testing based on the User Requirement and System Requirement Specification Documents 
+•	Expertise in Functional, System, Integration, Regression, Smoke, End2End Testing both manual, automation. 
+•	Knowledge and experience in testing Databases using SQL 
+•	Excellent working knowledge and experience in ArcGIS/ArcFM products
+•	Analyzing post test results and identifying the risks in the wide array of applications, interfaces in n-tier architecture 
+•	Good working knowledge of QC, HP ALM, Atlassian Jira, Version One 
+•	Excellent knowledge in SQL, SQL*Plus, Toad, T-SQL, and ETL, MS BI, SSIS & DW Testing 
+
+PROFESSIONAL EXPERIENCE: 
+
+SCE, CA   Pega GIPT
+QA Analyst                                                                                                                                                               Jan 2019- Present
+SCE Corp, the largest subsidiary of Edison International, is the primary electricity supply company for much of Southern California. It provides fourteen million people with electricity across a service territory of approx. fifty thousand square miles. Rule 21 is a tariff that describes the interconnection, operating and metering requirements for generation facilities to be connected to a utility’s distribution system. 
+Environment and Responsibilities: Utility-Transmission & Distribution, Customer Generations, SCE Service Account, Online Customer Portal, IR-Interconnection Request, Pega GIPT Application, Application Wizard, Intake Process, Application Request, Internal Review, Technical Analysis, Contract Development, User Roles: GICD Manager, GICD Analyst, FE Manager, FE Engineer & Customer roles, POC Test Environment, QA Environment, Dev Environment, SharePoint, User Stories, Functional Process documents, Training Manuals, Design workshops, Test Data, HP ALM, JIRA, Citrix VDI
+
+•	Reviewed QA Functional Requirement Documents, Training videos, Workflow Diagrams, POC & familiarized with Pega GIPT application
+•	Training and exams completion for mandatory FERC 
+•	Collaborated with dev teams, BAs and business users to understand the GIPT application
+•	Test Script designs and Reviews: Reviewed User stories & Functional Process documents, business requirements on GIPT application with business SMEs, BAs, formulated high level test Scenarios & decomposed scenarios in order to design test scripts in HP ALM
+•	Conducted walkthroughs, reviews, participated in design workshops, project meetings & updated outcomes to offshore testing team
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and End-to-End testing on Pega out-of-the-box GIPT application
+•	Conducted Cross Browser testing to ensure compatibility of the applications in different web browsers 
+•	User Security Roles: Using test data, validated different security user roles & permissions for Application Wizard, Application Request, Internal Review, Technical Analysis, Contract Development    
+•	Participated actively in daily standup and defect/Issue triage meetings 
+•	Prepared documents for daily test executions, defect reports & status updates for test manager
+
+
+Westar Energy, KS   Maximo &Spatial Upgrade
+QA Analyst                                                                                                                                                              Feb 2018– Aug 2018
+Westar Energy now known as Evergy is an investor owned electric utility headquartered in Topeka, Kansas. Westar is the largest electric company in Kansas, serving 690,000 residential, commercial and industrial customers in the eastern third of the state. Westar Energy generates more than 27,000,000 megawatt-hours of electricity per year at its 12 power plants. Westar Energy service territory covers 10,130 square miles (26,200 km2) in east and east-central Kansas. Westar Energy owns more than 6,300 miles (10,100 km) of transmission lines and about 28,100 miles of distribution lines.
+
+Environment and Responsibilities: Utilities-Transmission & Distribution, IBM Maximo & Spatial Upgrade IBM Maximo Utilities:7.6.0.1, IBM Maximo 7.6.0.8, IBM Maximo Spatial 7.6.0.2, IBM Maximo Start Center Test Environment, QA Environment, Dev Environment, GIS, GIS GWD-Graphic Work Design, IBM Maximo Spatial, SharePoint, Functional Process documents, Training Manuals, WO Tracking system, ALC-Asset Life Cycle application, IM-Inventory Management application, Test Data, GWD system, HP ALM, QC, JIRA, V-1, Version One, Citrix & VDI
+
+•	Reviewed QA Functional Requirement Documents, Training Manuals & familiarized with Maximo’s EAM                                        ALC applications, WO systems, Locations, IM-Inventory Management Systems, GIS ArcMap & GWD
+•	Training and exams completion for mandatory FERC.
+•	Training Sessions completed on GIS ArcMap & GIS GWD-Graphic Work Designs, Maximo WO, Inventory management & Assets –Asset lifecycle systems. 
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and End-to-End testing on Maximo systems & GIS GWD, Maximo WO, Inventory Management & Assets–Asset lifecycle systems.
+•	Maximo Asset Life Cycle Test Script Designs and Reviews: Reviewed Business requirements & Functional Process documents on Maximo ALC application, interacted with SMEs, BA’s formulated test Scenarios & decomposed scenarios & designed detailed test scripts. 
+•	IM Test Script Design and Review process: Reviewed Maximo Inventory Management TMs, Functional Process documents, interacted with BA’s, SMEs, formulated test Scenarios & decomposed them to design detailed test scripts. 
+•	User Security Test Script Designs: Reviewed Maximo BRS documents, formulated test Scenarios & decomposed them to design detailed test scripts. 
+•	Design Test Scripts for different Map Spatial Application Tools.
+•	Performed testing on Map Spatial Application Tools, Raised Defects for Map Spatial Application, retested for Fixed Defects through the defect resolution.
+•	Designed Maximo QA vs Dev 03 User Interface Test Scripts for different Maximo applications.
+•	Conducted Cross Browser testing to ensure compatibility of the applications in different web browsers. 
+•	Performed regression Testing –ALM Test Lab test executions- ALC-Asset Life Cycle Test Scripts.
+•	Performed regression Testing on Maximo IM-Inventory Management Systems and raised defects
+•	Build verification and sanity testing for GIS GWD, Inventory Mgt. & ALC applications performed until defect/Issue resolutions.
+•	Conducted weekly walkthroughs, inspections, participated in project meetings to update the status of the testing efforts. 
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and End-to-End testing on Maximo & GIS GWD
+•	Participated in Daily Standup and Defect/Issue Triage Meetings. 
+•	Prepared & sent documents for project summary, daily test executions, Defect reports, Reports & status updates
+
+
+SDG&E, CA   GIS Upgrade
+QA Test Engineer                                                                                                                                                     May 2016-Feb 2018  
+San Diego Gas and Electric is the utility that provides natural gas and electricity to San Diego County and southern Orange County in southwestern California. It is owned by Sempra Energy, a Fortune 500 energy services holding company that is based in San Diego. Esri ArcGIS platform, is a complete enterprise utility solution for editing, modeling, maintenance, and management of facility and land base information for electric, gas, and water/wastewater utilities. It takes advantage of an industry-standard architecture and programming environments, an easy-to-use interface, and powerful cartographic tools, giving utilities an optimized solution for the entire organization
+
+Environment and Responsibilities: SDG&E ArcGIS Utilities - Transmission & Distribution, ArcGIS 10.2.1 & 9.3.1, ESRI /Schneider Electric ArcFM Solutions Desktop 10.2.1 & 9.3.1, GIS Applications, C# /.NET, MS SQL Server, QC/HP ALM, SharePoint, VDI.SEMPRA, GIS Standards, Citrix-ArcFM Solutions-GIS Desktop application, GIS Schematics app, ArcGIS Pro-Plotting Solutions, ArcFM Web Applications
+•	ESRI-GIS Training and obtained GIS Certifications. 
+•	Training and exams completion for mandatory FERC 
+•	Trained in SDGE&E’s GIS Transmission & Distribution Sector on ArcFM 9.3.1, ArcFM 10.2.1, ArcFM Solutions - Desktop, GIS Applications, GIS Web Application & Web Reports, GIS-Schematics, ArcFM Mobile Applications, ArcGIS Pro-Solution Plotting Services, Mapping, Digitizing, Analysis of SDGE Electric systems, Generations, Sub Stations, Distributions, CO’s - Customer Generations, Transmissions and related Equipment such as Distribution Transformers, Distribution Overhead & Underground Conductors, Voltage Regulators, Fault Indicators, Service Restorers, Capacitors, Fuses, Terminals, Terminators, Group Switches, Network Connectors, Batteries, Antennas, Equipment Change-outs, Equipment Installations.
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and End-to-End testing on ArcFM Solutions 9.3.1, ArcFM Solutions 10.2.1 GIS Applications, ArcFM, GIS Web, GIS Schematics, ArcGIS Pro-Plotting Solutions 
+•	Collaborated with team members and participated in review meeting with developers and Business Analyst's, SME’s for understanding the requirements & GIS desktop applications 
+•	Analyzed GIS Application BRS, functional specifications docs Use Case documents for functional testing. 
+•	Performed requirement analysis with QA manager & business SME’s and prepared test scenarios for different features, decomposed them into detailed test scripts in HP ALM for all GIS systems.
+•	Designed and executed the test plans, test scripts, to check the data validity for GIS applications, tracking software and specification defects and resolution using HP ALM, documenting all phases of QA life cycle, analyze functional requirements, mapping documents. 
+•	Participated actively in Daily Standup and Defect/Issue triage meetings and GIS upgrade project meetings 
+•	Performed the System and Acceptance testing of the ArcFM Desktop application based on the Customer Environment 
+•	Test case creation, test case execution, and Defect management in QC/HP ALM. 
+•	Participated in weekly walkthroughs, inspection, project meetings, to update the status of the testing efforts. 
+
+
+East West Bank, CA DCI 
+QA Analyst 							                                                                  Dec 2015-May 2016 
+East West Bank is a bank based in the state of California in the United States, with assets of Banks to integrate customer identification programs, Customer Risk Rating, and Anti Money Laundering-AML Enhanced Due Diligence-EDD activities into account-opening processes. 
+
+Environment and Responsibilities: Banking Domain: Crowe Horwath AML DCI Application, CDD, KYC-Know Your Customer, KYA-Know Your Account, Front Office, Back Office, Admin Roles, Microsoft .NET, MS Windows 10, SQL Server 2010, Citrix VPN Network, Share Point, TM tool - Quality Center/HP ALM 
+•	Prepared test Scripts, executed and prepared requirement matrices. 
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and end-to-end Testing of DCI Application 
+•	Reviewed in review of BRD and FRS and created Test Plan and Test cases for Crowe Horwath Application. 
+•	Performed Liaison role between BSAs, Onshore Tech leads and Offshore Developers on the Project. 
+•	Involved in review of BRD and SDD and created Test Plan and Test cases. 
+•	Worked on AUT and raised defects against requirements and prepared Daily Status Reports. 
+•	Participated in daily standup and Defect Triage meetings. 
+•	Participated in weekly walkthrough and inspection, project meetings, to update the status of the testing efforts. 
+
+
+San Diego Gas & Electric, CA Proj: CPPD	
+QA Analyst 							                                                                  May 2015–Dec 2015                        SDG&E is the utility that provides natural gas and electricity to San Diego County and southern Orange County in southwestern California. It is owned by Sempra Energy, a Fortune 500 energy services holding company that is based in San Diego. CPP-D Automation: CPP-D specific capabilities including eligibility, rate comparisons for applicable rates, choosing a capacity reservation (CR), rate dis-enrollment and event day notifications. 
+
+Environment and Responsibilities: SDG&E Utilities - Marketing & Sales: SAP CRM, Mainframe DB2 Database, Sempra My Accounts Online Portal, Aclara Reports, ALM/ HP Quality Centre, Share Point, V-Model Methodology, Browsers: Chrome, Firefox, & IE, VDI-Sempra, Functional, Integration, System & E2E tastings and Database tastings 
+•	Analyzed the user requirements, functional specifications and used Case documents for Functional testing. 
+•	Reviewed business Documents and prepared Test Cases using Quality Center/ALM based on the requirements. 
+•	Designed, executed the test plans, test scripts, to check the data validity for applications, tracking software and specification defects and resolution using Quality Center/ALM, documenting all phases of QA life cycle, analyze functional requirements, mapping documents. 
+•	Actively participated in Daily Defect/Issue Triage Meetings and project meetings 
+•	Interacted with the team members and participated in review meeting with developers and Business Analysts for understanding the requirements. 
+•	Extensively worked on web testing of My Accounts Online Portal, backend & CISCO Mainframe database and SAP CRM verifications. 
+•	Test case creation, test case execution, and Defect management in HP ALM /QC. 
+•	Prepared documents test executions, Defect reports and status updates
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and end-to-end Testing. 
+•	Conducted Cross browser testing to ensure compatibility of the applications in different web browsers for MyAccounts.
+•	Participated in weekly walkthrough and inspection, project meetings, to update the status of the testing efforts. 
+
+
+Clairvoyant LLC, AZ 
+QA Analyst                                                                                                                                                            Jun 2013 –May 2015 
+Petgenius.com-Petgenius is one of the newer startups and is focused on serving the Pet lover community. The organization offers a series of services to Pet Owners and medical professionals through their online portal, PetGenius.com. 
+Everspring Education Integration Platform - Everspring is a full-service, customized online educational solutions provider. The Education Platform is multi-tenant SaaS platform supporting Marketing, Enrollment, CRM, Mobile, Curriculum and Online Classroom products offered to the partner universities. 
+
+Environment and Responsibilities: Jira, Quality Center/ALM, QTP, Soap UI, SQL, AWS Cloud Computing, Apple/Android device mobile tests, IE, Firefox, Chrome & Safari 
+•	Participating in analysis of requirements for the release 
+•	Extensively worked on web testing, web services testing & Database verifications 
+•	Participated Scrum meeting for planning which involved clarification of user stories, estimate & breakdown user stories in tasks, daily scrum, & sprint demo, retrospective & lead team of a few junior testers 
+•	Developed, executed smoke tests, functional tests, regression tests both for backend web services, mobile application, web UI 
+•	Prepared test Scripts, executed and prepared Requirement Traceability matrices 
+•	Tested Ever spring Mobile Application on various mobile platforms – Android and Apple
+•	Tested Everspring and Petgenius products on various browsers IE, Firefox, Chrome and Safari 
+•	Test case creation, test case execution, & Defect management in QC and Jira 
+•	Prepared documents for test executions, Defect reports & status updates 
+
+
+Clear Channel, CA 
+QA Analyst 							                                                         Feb 2012 – Apr 2013 
+Clear Channel a Global Media Plus Entertainment Co. specializes in Radio Broadcasting through subsidiary Clear Channel Broadcasting Inc. and division Clear channel Media and entertainment. Clear Channel is the largest owner of full-power AM and FM 
+radio stations and twelve radio channels on XM Satellite Radio and Billboard advertising through subsidiary Clear Channel Outdoor Holdings Inc. is one of the world's largest outdoor advertising companies with close to one million displays in over 30 countries. 
+
+Environment and Responsibilities: Microsoft .NET, MS Windows7, SQL Server 2008, HP Quality Center 
+•	Designed and executed the test plans, test scripts, to check the data validity for various applications, tracking software and specification defects and resolution using Quality Center, documenting all phases of QA life cycle, analyze functional requirements, mapping documents 
+•	Performed Liaison role between BSAs, Onshore Tech leads and Offshore Developers on the Project 
+•	Involved in review of BRD and SDD, created Test Plans, test scenarios & Test cases 
+•	Prepared test Scripts, executed, raised defects, prepared requirement matrices 
+•	Performed functional, Black Box, Integration, System, Regression, Smoke and end-to-end Testing 
+•	Conducted Cross browser testing to ensure compatibility of the application in different web browsers 
+•	Participated in weekly walkthrough and inspection, project meetings, to update the status of the testing efforts
+
+
+Warner Pacific Ins. Services, CA 
+QA Test Analyst 								                                              Sep 2010 – Dec 2011 
+Warner Pacific Insurance Services is one of the leading full service agencies and a top producing General Agency for the nation's largest Health Insurance Carriers. Warner Pacific represents a wide array of medical, dental, vision, life and other specialty products to meet the needs of Brokers and their Clients. 
+
+Environment and Responsibilities: Windows 2000, 2003, NT, AMS-360, MS TFS, MS SharePoint 2007, Agile Scrum 
+methodology, VS-2005, ASP.net, C#, AS 400, Java Script, J2EE, MS Access, SSRS, MS CRM 4.0, Jira3.0, QTP 9.2 
+•	Worked on the transition projects from Access to .net and SQL Server. 
+•	Participated in Weekly Project update Status Meetings. 
+•	Prepared test estimates, represented QA in JAD sessions, Review and Kickoff meetings. 
+•	Tested Business Applications in Microsoft CRM and SharePoint. 
+•	Helped Automation team in creating Regression Test Sets for Test, Dev and Prod environments. 
+•	Extensively worked on Quotes, Submissions and Requirements for the various Carriers. 
+•	Tested the Application in Test, Dev and Production environments and raised the defects. 
+
+
+Autobytel, Irvine CA 
+QA Tester								                                               Oct 2009 – Aug 2010 
+Autobytel is one of the largest online automotive marketplaces, empowering consumers to make smart vehicle choices using objective automotive data and insightful interactive editorial content. Consumers facilitate their vehicle purchasing decisions by visiting Autobytel owned websites. 
+
+Environment and Responsibilities: SQL Server, HTML, ASP. Net, Test Partner, Clarity, J2EE, PHP, SOAP 
+•	Extensively worked on Test Plans, Scenarios and Test Cases for the projects of the New Website. 
+•	Involved in testing new data structures ensuring smooth transitions. 
+•	Extensively worked on the backend testing and the database verification. 
+•	Represented QA in status update meetings with third party Business Analysts, Developers. 
+•	Involved in internal close and client database deployments in QA and Production environments. 
+
+TECHNICAL SKILLS: 
+Testing Tools: Quality Center/QC/HP ALM, QTP, Toad, Jira, Version One, Web Services-Soap UI 
+Defect Tracking Tools: Clear Case, SharePoint, JIRA, Version One, HP ALM/Quality Center, TFS 
+Scripting: VBScript, SQL, SQL*Plus, PL/SQL, T-SQL
+Web Technologies: HTML, DHTML, XML, XSS, CSS, VBScript, Web Services, QTP, SOAP UI 
+Programming: MS Visual Basic 6.0, Java, PL/SQL 
+Database: MS SQL Server 2000/2005/2008, MS Access 97/2000, Oracle 8.1.6, 9i, MySQL, IBM Mainframes, SAP ECC 6.0, SAP BI, DB2 
+Software: MS Visual Studio, MS SS MS, MS Visual Studio SSDT 2017, MS Transaction Server, MS Office, IBM Maximo Spatial, IBM Maximo, IBM Start Center, GIS Certifications, Healthcare knowledge, Pega Application
+Operating Systems: Windows, UNIX/Linux, iOS, Android, Mobile Testing
+ 	
+EDUCATION:
+Bachelors in Physics/Electronics, Computer Applications, Trained per QAI Standards, GIS Certifications & Database Certifications. Languages Known: English, Hindi, Urdu, Telugu
+Visa Status: Green Card –Permanent Resident
+
+
+
+
+
+
+
+
