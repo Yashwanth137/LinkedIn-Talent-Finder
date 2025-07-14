@@ -2,7 +2,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams
 from config import settings  # assuming settings.embedding_dim is defined
 
-client = QdrantClient(host="localhost", port=6333)
+client = QdrantClient(host="localhost", port=6333, timeout=30.0)
 
 COLLECTION_NAME = "resume_vectors"
 

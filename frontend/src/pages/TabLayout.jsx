@@ -173,7 +173,10 @@ const TabLayout = () => {
         {activeTab === "Search Results" && (
           <SearchResults results={searchResults} />
         )}
-        {activeTab === "Dashboard" && <Dashboard />}
+        {activeTab === "Dashboard" && (
+          <Dashboard results={searchResults} />
+        )}
+
       </div>
     </div>
   );
