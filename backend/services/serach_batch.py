@@ -10,6 +10,7 @@ from langchain.output_parsers import StructuredOutputParser
 from langchain.prompts import load_prompt
 from langchain_groq import ChatGroq
 from langchain.output_parsers import PydanticOutputParser
+from config import settings
 
 # === CONFIG ===
 QDRANT_COLLECTION = "llm_qdrant_llm"
@@ -17,6 +18,7 @@ QDRANT_HOST = "localhost"
 QDRANT_PORT = 6333
 GROQ_MODEL = "llama-3.3-70b-versatile"
 BATCH_SIZE = 20
+api = settings.api
 
 # === Pydantic Schema for Output ===
 class CandidateScore(BaseModel):
@@ -36,13 +38,13 @@ prompt = load_prompt(prompt_path)
 llm = ChatGroq(
     model=GROQ_MODEL,
     temperature=0,
-    api_key=os.getenv("GROQ_API_KEY", "api")
+    api_key=os.getenv("GROQ_API_KEY", api)
 )
 
 chain = prompt | llm | parser
 
 # === Qdrant and Embedding Setup ===
-qdrant = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT)
+qdrant = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT, timeout=30.0)
 embedder = INSTRUCTOR("hkunlp/instructor-large")
 
 def run_search_pipeline(job_description: str, top_k: int = 10) -> List[CandidateScore]:

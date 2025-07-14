@@ -6,6 +6,9 @@ const SearchResults = ({ results }) => {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const resultsPerPage = 9; // adjust as needed
+
 
   useEffect(() => {
     console.log("Incoming search results:", results);
@@ -32,7 +35,10 @@ const SearchResults = ({ results }) => {
       }
     };
 
-    if (results.length) fetchProfiles();
+    if (results.length) {
+      setCurrentPage(1);
+      fetchProfiles(); // your fetching logic
+    }
   }, [results]);
 
   const openModal = (profile) => {
@@ -54,31 +60,79 @@ const SearchResults = ({ results }) => {
       ) : profiles.length === 0 ? (
         <p className="text-gray-500">No profiles found</p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {profiles.map((profile) => (
-            <div
-              key={profile.document_id}
-              className="bg-white/90 border border-blue-100 p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 cursor-pointer hover:scale-[1.02]"
-              onClick={() => openModal(profile)}
+        <>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {profiles
+              .slice((currentPage - 1) * resultsPerPage, currentPage * resultsPerPage)
+              .map((profile) => (
+                <div
+                  key={profile.document_id}
+                  className="bg-white/90 border border-blue-100 p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 cursor-pointer hover:scale-[1.02]"
+                  onClick={() => openModal(profile)}
+                >
+                  <h3 className="text-xl font-semibold text-blue-700 mb-1">
+                    {profile.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-1">Email: {profile.email}</p>
+                  <p className="text-gray-600 text-sm mb-1">
+                    Score:{" "}
+                    <span className="font-medium text-purple-600">{profile.score}</span>
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {profile.skills?.slice(0, 4).map((skill, idx) => (
+                      <span
+                        key={idx}
+                        className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                    {profile.skills?.length > 4 && (
+                      <span className="text-xs bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-medium">
+                        +{profile.skills.length - 4} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          {/* ✅ Pagination Controls */}
+          <div className="flex justify-center mt-10 space-x-2">
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+              disabled={currentPage === 1}
             >
-              <h3 className="text-xl font-semibold text-blue-700 mb-1">{profile.name}</h3>
-              <p className="text-gray-600 text-sm mb-1">Email: {profile.email}</p>
-              <p className="text-gray-600 text-sm mb-1">Score: <span className="font-medium text-purple-600">{profile.score}</span></p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {profile.skills?.slice(0, 4).map((skill, idx) => (
-                  <span key={idx} className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">
-                    {skill}
-                  </span>
-                ))}
-                {profile.skills?.length > 4 && (
-                  <span className="text-xs bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-medium">
-                    +{profile.skills.length - 4} more
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+              Prev
+            </button>
+
+            {[...Array(Math.ceil(profiles.length / resultsPerPage)).keys()].map((page) => (
+              <button
+                key={page + 1}
+                onClick={() => setCurrentPage(page + 1)}
+                className={`px-3 py-2 rounded ${currentPage === page + 1
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+              >
+                {page + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() =>
+                setCurrentPage((p) =>
+                  p < Math.ceil(profiles.length / resultsPerPage) ? p + 1 : p
+                )
+              }
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+              disabled={currentPage === Math.ceil(profiles.length / resultsPerPage)}
+            >
+              Next
+            </button>
+          </div>
+        </>
       )}
 
       {/* ✅ Modal Popup */}
