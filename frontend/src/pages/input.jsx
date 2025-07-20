@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, memo } from 'react';
 import {
-  FileText, Eye, Zap, Award
+  FileText, Eye
 } from 'lucide-react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import axios from 'axios';
@@ -15,7 +15,22 @@ const SkillTag = memo(({ skill }) => (
 ));
 
 export default function InputPage({ activeTab, onTabChange, jobDescription, setJobDescription, setSearchResults }) {
-  const skills = ['React', 'Python', 'AI/ML', 'Leadership', 'Strategy', 'Design'];
+  const [errorMessage, setErrorMessage] = useState('');
+  const [skillInput, setSkillInput] = useState('');
+  const [userSkills, setUserSkills] = useState([]);
+
+  const addSkill = () => {
+    const trimmed = skillInput.trim();
+    if (trimmed && !userSkills.includes(trimmed)) {
+      setUserSkills([...userSkills, trimmed]);
+      setSkillInput('');
+    }
+  };
+
+  const removeSkill = (skillToRemove) => {
+    setUserSkills(userSkills.filter(skill => skill !== skillToRemove));
+  };
+
   const [topk, setTopK] = useState(10);
 
 
@@ -25,18 +40,56 @@ export default function InputPage({ activeTab, onTabChange, jobDescription, setJ
 
   const handleSmartSearch = async (e) => {
     e.preventDefault();
+
+    if (!jobDescription.trim()) {
+      setErrorMessage("Please enter a job description to get profiles.");
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 1500); // Hide after 1 seconds
+      return; // ❌ Do not navigate
+    }
+
+    // Show loading state
+    setSearchResults({
+      results: [],
+      loadingInfo: {
+        isLoading: true,
+        topK: topk,
+        total: topk,
+        error: null
+      },
+      userSkills: userSkills
+    });
+    onTabChange("Search Results");
+
     try {
       const response = await axios.post("http://localhost:8000/search", {
         job_description: jobDescription,
         top_k: topk
-      }, {
-        headers: { "Content-Type": "application/json" }
       });
-      setSearchResults(response.data);
-      onTabChange('Search Results');
+
+      setSearchResults({
+        results: response.data,
+        loadingInfo: {
+          isLoading: false,
+          topK: topk,
+          total: response.data.length,
+          error: null
+        },
+        userSkills: userSkills
+      });
     } catch (err) {
-      console.error(err);
-      alert('Search failed.');
+      console.error("Search failed:", err);
+      setSearchResults({
+        results: [],
+        loadingInfo: {
+          isLoading: false,
+          topK: 0,
+          total: 0,
+          error: "Search failed. Please try again later."
+        },
+        userSkills: userSkills
+      });
     }
   };
 
@@ -47,16 +100,25 @@ export default function InputPage({ activeTab, onTabChange, jobDescription, setJ
           <polygon points="0,0 100,0 0,100" fill="#3B82F6" opacity="0.08" />       {/* Blue-500 */}
           <polygon points="100,100 200,0 200,200" fill="#6366F1" opacity="0.08" />  {/* Indigo-500 */}
           <polygon points="100,300 300,100 400,400" fill="#A78BFA" opacity="0.08" />{/* Purple-400 */}
-          
           <polygon points="1400,650 1300,750 1200,600" fill="#6366F1" opacity="0.04" />
           <polygon points="1100,700 1200,800 1300,700" fill="#A78BFA" opacity="0.05" />
           <polygon points="1000,900 1100,950 1050,1050" fill="#3B82F6" opacity="0.05" />
           <polygon points="1150,850 1250,900 1200,1000" fill="#6366F1" opacity="0.05" />
         </svg>
 
-
         {/* Main Content */}
         <div className="flex-1 flex flex-col items-center justify-start px-6 pt-12 pb-0">
+          {errorMessage && (
+            <m.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-4 px-4 py-3 rounded-lg bg-blue-100 text-white-800 shadow font-medium text-sm"
+            >
+              ⚠️ {errorMessage}
+            </m.div>
+          )}
+
           {/* Instruction Text */}
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
@@ -85,11 +147,41 @@ export default function InputPage({ activeTab, onTabChange, jobDescription, setJ
                   <span>{jobDescription.length}/2000</span>
                 </div>
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="text-sm text-gray-500 mr-2">Popular skills:</span>
-                {skills.map((skill) => (
-                  <SkillTag key={skill} skill={skill} />
-                ))}
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Required Skills</label>
+                <div className="flex items-center gap-2 mb-2">
+                  <input
+                    type="text"
+                    value={skillInput}
+                    onChange={(e) => setSkillInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
+                    placeholder="Type skill and press Enter"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm focus:ring-2 focus:ring-blue-200"
+                  />
+                  <button
+                    onClick={addSkill}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+                  >
+                    Add
+                  </button>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {userSkills.map((skill, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                    >
+                      {skill}
+                      <button
+                        onClick={() => removeSkill(skill)}
+                        className="text-blue-600 hover:text-red-500"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="mb-6">
@@ -112,9 +204,7 @@ export default function InputPage({ activeTab, onTabChange, jobDescription, setJ
                 onClick={handleSmartSearch}
                 className="group flex items-center space-x-3 px-10 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white rounded-2xl font-bold text-lg hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 transform hover:scale-105"
               >
-                <Zap className="w-6 h-6 group-hover:animate-spin" />
-                <span>AI Smart Search</span>
-                <Award className="w-5 h-5 group-hover:animate-bounce" />
+                <span>Fetch Profiles</span>
               </button>
             </div>
           </div>

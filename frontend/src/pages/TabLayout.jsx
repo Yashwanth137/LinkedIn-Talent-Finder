@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import {
-  FileText, Search, BarChart3, Briefcase, Settings, User
+  FileText, Search, BarChart3, Briefcase, User
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import InputPage from "./input";
@@ -45,7 +45,10 @@ const TabButton = ({ tab, isActive, onClick }) => {
 const TabLayout = () => {
   const [activeTab, setActiveTab] = useState("Job Description");
   const [jobDescription, setJobDescription] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({
+    results: [],
+    loadingInfo: { isLoading: false, total: 0, topK: 0 }
+  });
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
   const dropdownRef = useRef(null);
@@ -171,10 +174,17 @@ const TabLayout = () => {
           />
         )}
         {activeTab === "Search Results" && (
-          <SearchResults results={searchResults} />
+          <SearchResults
+            results={searchResults.results}
+            loadingInfo={searchResults.loadingInfo}
+            userSkills={searchResults.userSkills}
+          />
         )}
+
         {activeTab === "Dashboard" && (
-          <Dashboard results={searchResults} />
+          <Dashboard 
+          results={searchResults.results} 
+          userSkills={searchResults.userSkills}/>
         )}
 
       </div>
