@@ -1,19 +1,15 @@
 import os
 import json
-import logging
 from typing import List
 from pydantic import BaseModel, Field
-from InstructorEmbedding import INSTRUCTOR
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import load_prompt
 from langchain_groq import ChatGroq
 from config import settings
-from utils.qdrant_client_wrapper import get_qdrant_client
+from utils.qdrant_client_wrapper import qdrant_client
 from qdrant_client.models import PointStruct
-
-# === Logging ===
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] - %(message)s")
-logger = logging.getLogger(__name__)
+from utils.logger import logger
+from utils.model_loader import model
 
 # === LLM & Prompt Setup ===
 GROQ_MODEL = "llama-3.3-70b-versatile"
@@ -40,8 +36,8 @@ llm = ChatGroq(
 chain = prompt | llm | parser
 
 # === Embedding and Qdrant Setup ===
-embedder = INSTRUCTOR("hkunlp/instructor-large")
-qdrant = get_qdrant_client
+embedder = model
+qdrant = qdrant_client
 
 def run_search_pipeline(job_description: str, top_k: int = 10) -> List[CandidateScore]:
     query_instruction = "Represent the job description for matching resumes:"

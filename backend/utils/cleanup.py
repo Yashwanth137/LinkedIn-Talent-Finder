@@ -1,12 +1,9 @@
-import logging
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 from config import settings
 from models import Resume
-from utils.qdrant_client_wrapper import get_qdrant_client
-
-# === Logger Setup ===
-logger = logging.getLogger(__name__)
+from utils.qdrant_client_wrapper import qdrant_client
+from utils.logger import logger
 
 def cleanup_expired_resumes(db: Session):
     """
@@ -21,7 +18,7 @@ def cleanup_expired_resumes(db: Session):
 
     for resume in expired_resumes:
         try:
-            get_qdrant_client.delete(
+            qdrant_client.delete(
                 collection_name=settings.qdrant_collection,
                 points_selector={"points": [resume.document_id]}
             )

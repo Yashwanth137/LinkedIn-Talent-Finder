@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from config import settings
+from utils.logger import logger
 
 SECRET_KEY = settings.secret_key
 
@@ -18,9 +19,8 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
 def verify_token(token: str):
     try:
         decoded = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
- #       print("✅ Decoded token:", decoded)
         return decoded
     except JWTError as e:
-        print("❌ Token verification failed:", e)
+        logger.error("❌ Token verification failed:", exc_info=True)
         return None
 

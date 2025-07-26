@@ -35,7 +35,6 @@ function App() {
             }
           />
 
-          {/* ✅ Optional: Redirect old "/input" path to new "/app" */}
           <Route path="/input" element={<Navigate to="/app" replace />} />
 
           <Route path="/profile/:id" element={<ProfilePage />} />

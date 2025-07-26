@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const LoginRegisterPage = () => {
-  const navigate   = useNavigate();
-  const { login }  = useAuth();                // from AuthContext
+  const navigate = useNavigate();
+  const { login } = useAuth();                // from AuthContext
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
-  const handleSignInClick  = () => setIsSignUpActive(false);
-  const handleSignUpClick  = () => setIsSignUpActive(true);
+  const handleSignInClick = () => setIsSignUpActive(false);
+  const handleSignUpClick = () => setIsSignUpActive(true);
 
   /** -------------------------------------------------
    *  Handle submit for BOTH “Sign In” and “Sign Up”
@@ -18,34 +18,32 @@ const LoginRegisterPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data     = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(formData.entries());
 
     /* Choose endpoint */
     const url = isSignUpActive
       ? 'http://localhost:8000/auth/signup'
       : 'http://localhost:8000/auth/login';
 
-   try {
-  console.log("🔄 Sending login/signup request to:", url);
-  const res = await axios.post(url, data);
-  console.log("✅ Received response:", res.data);
+    try {
 
-  const token = res.data.token;
-  if (!token) throw new Error("❌ No token returned from backend");
+      const res = await axios.post(url, data);
 
-  console.log("🔐 Saving token:", token);
-  localStorage.setItem("token", token);
+      const token = res.data.token;
+      if (!token) throw new Error("❌ No token returned from backend");
 
-  login(token);
-  navigate("/app");
-} catch (err) {
-  console.error("❌ Error during auth:", err);
-  const msg =
-    err.response?.data?.detail ||
-    err.response?.data?.message ||
-    "Something went wrong. Try again.";
-  alert(msg);
-}
+      localStorage.setItem("token", token);
+
+      login(token);
+      navigate("/app");
+    } catch (err) {
+      console.error("❌ Error during auth:", err);
+      const msg =
+        err.response?.data?.detail ||
+        err.response?.data?.message ||
+        "Something went wrong. Try again.";
+      alert(msg);
+    }
 
   };
 

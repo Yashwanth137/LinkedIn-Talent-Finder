@@ -1,65 +1,133 @@
+# 🧠 Talent Finder
 
-# LinkedIn Talent Finder
+AI-powered resume ranking and matching system that allows users to upload resumes and match them to job descriptions using semantic search, advanced filters, and a modern UI.
 
-A web application to streamline talent discovery using LinkedIn data. Built with a React frontend and a Python backend.
+---
 
-## 📁 Project Structure
+## 🚀 Features
 
-```
-LinkedIn-Talent-Finder/
-├── frontend/        # React app
-├── backend/         # Python backend (FastAPI)
-└── README.md
-```
+* 📄 Upload and parse resumes (PDF/DOCX)
+* 🤖 AI-powered semantic search (Instructor model)
+* 🔍 Top-k matching resumes with similarity scores
+* 🧰 Filters: experience, skills, location
+* 📊 Admin dashboard with radar chart and summary stats
+* 🧼 Duplicate detection and skipped file handling
+* 🔐 JWT-based authentication
+* 🎨 Frontend with React + Tailwind CSS
 
-##  Getting Started
+---
 
-### Prerequisites
+## 🛠️ Tech Stack
 
-- Node.js (v18+)
-- Python (v3.9+)
-- Git
+| Layer     | Technology                                    |
+| --------- | --------------------------------------------- |
+| Frontend  | React, Tailwind CSS                           |
+| Backend   | FastAPI, Pydantic                             |
+| DB        | PostgreSQL                                    |
+| Vector DB | Qdrant                                        |
+| ML Model  | hkunlp/instructor-large (InstructorEmbedding) |
+| Auth      | JWT                                           |
 
-### 1. Clone the Repository
+---
+
+## 📁 Backend Structure
 
 ```bash
-git clone https://github.com/your-username/LinkedIn-Talent-Finder.git
-cd LinkedIn-Talent-Finder
+backend/
+│
+├── app.py                        # Main FastAPI app with startup logic & background scheduler
+├── db.py                         # SQLAlchemy database session and engine setup
+├── config.py                     # Environment & app configuration using Pydantic
+├── models.py                     # SQLAlchemy ORM models for PostgreSQL
+├── schemas.py                    # Pydantic schemas for request/response validation
+├── requirements.txt              # Python dependencies
+│
+├── routes/                       # API route definitions
+│   ├── auth.py                   # Authentication routes (login, token)
+│   └── resumes.py                # Resume upload, count, and search endpoints
+│
+├── services/
+│   ├── upload_backend/
+│   │   ├── upload.py             # Custom resume parser & uploader
+│   │   ├── template.py           # Jinja2 or resume format template handling
+│   │   └── prompt.json           # Prompt for LLM-based resume parsing
+│   ├── search_batch.py           # Batch search logic using embedding or reranking
+│   ├── search_template.py        # Prompt templates for job description parsing
+│   └── structured_ranking_prompt.json # LLM prompt for structured reranking
+│
+├── utils/
+│   ├── cleanup.py                # Background task to delete expired resumes - auto delete
+│   ├── jwt.py                    # JWT creation and verification logic
+│   ├── qdrant_client_wrapper.py # Wrapper to initialize and manage Qdrant client
+│   └── logger.py                 # Centralized logging config (used across backend)
+
 ```
 
-### 2. Setup Frontend
+---
+
+## ⚙️ Setup Instructions
+
+### 🔧 Backend
+
+```bash
+git clone https://github.com/Yashwanth137/LinkedIn-Talent-Finder.git
+cd backend
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: .\venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Create a .env file
+```
+
+`.env` example:
+
+```env
+SECRET_KEY=your-secret
+postgres_url=postgresql+psycopg2://user:password@localhost:5432/<database_name>
+qdrant_host=http://localhost:6333 
+embedding_dim=1024
+api=your-api-key
+
+api1=your-api-key
+api2=your-api-key
+```
+
+```bash
+# Start the FastAPI app
+uvicorn app:app --reload
+```
+
+---
+
+### 🌐 Frontend
 
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
-
-### 3. Setup Backend
-
-```bash
-cd ../backend
-python -m venv venv
-venv\Scripts\activate # on windows
-pip install -r requirements.txt
-uvicorn main:app --reload  # for FastAPI
-```
-
-## 🧪 Testing
-
-- Frontend: `npm test`
-- Backend: `pytest` or your preferred test runner
-
-## 🤝 Contributing
-
-1. Fork the repo
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-MIT License
 
 ---
+
+## 🔐 Authentication
+
+* JWT-based login (`/auth/login`) returns token
+* Include token in `Authorization` header:
+
+```http
+Authorization: Bearer <token>
+```
+
+## 🧠 AI Smart Search
+
+* Input job description + top-k value
+* Backend returns semantically matched resumes
+* Filters include:
+
+  * Minimum experience
+  * Required skills
+* Search Results page shows ranked list with scores

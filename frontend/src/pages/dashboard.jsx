@@ -5,13 +5,13 @@ import {
   RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend,
 } from "recharts";
 
-// ✅ Reusable component: Skill status icon
+// Reusable component: Skill status icon
 const SkillStatusIcon = ({ hasSkill }) =>
   hasSkill
     ? <span className="text-emerald-500 font-bold">✓</span>
     : <span className="text-red-400 font-bold">✗</span>;
 
-// ✅ Utility: Get top occurring skills across all profiles
+// Utility: Get top occurring skills across all profiles
 const getTopSkills = (profiles, limit = 8) => {
   const freq = {};
   profiles.forEach(profile => {
@@ -26,7 +26,7 @@ const getTopSkills = (profiles, limit = 8) => {
     .map(([skill]) => skill);
 };
 
-// ✅ Utility: Prepare radar chart data comparing ideal vs candidate
+// Utility: Prepare radar chart data comparing ideal vs candidate
 const buildRadarData = (profiles, skills, selectedId) => {
   const selectedProfile = profiles.find(p => p.document_id === selectedId);
   if (!selectedProfile) return { data: [], candidateName: 'Candidate', skillMatch: [] };
@@ -47,7 +47,7 @@ const buildRadarData = (profiles, skills, selectedId) => {
   return { data, candidateName, skillMatch };
 };
 
-// ✅ Main Dashboard component
+// Main Dashboard component
 const Dashboard = ({ results = [], userSkills = [], topK = 10 }) => {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,7 @@ const Dashboard = ({ results = [], userSkills = [], topK = 10 }) => {
     fetchProfiles();
   }, [results, topK]);
 
-  // === 📊 Chart Data Prep ===
+  // === Chart Data Prep ===
   const sortedProfiles = [...profiles].sort((a, b) => b.score - a.score);
   const barData = sortedProfiles.map(p => ({
     name: p.name?.split(" ")[0] || p.document_id,
@@ -116,16 +116,15 @@ const Dashboard = ({ results = [], userSkills = [], topK = 10 }) => {
       ) : (
         <>
 
-          {/* ⭐️ --- Reworked Skill Comparison Section --- ⭐️ */}
-          {/* ⭐️ --- Reworked Skill Comparison Section --- ⭐️ */}
+          {/* --- Reworked Skill Comparison Section --- */}
           {radarChartSkills.length > 0 && (
             <div className="w-full bg-white shadow rounded-xl p-8 space-y-6">
-              {/* 🔼 Header */}
+              {/* Header */}
               <h3 className="text-2xl font-bold text-emerald-700">
                 Skill Analysis vs. Ideal Profile
               </h3>
 
-              {/* 🔽 Candidate Select Dropdown */}
+              {/*  Candidate Select Dropdown */}
               <div>
                 <label htmlFor="profile-select" className="mr-3 text-sm font-medium text-gray-700">
                   Compare Candidate:
