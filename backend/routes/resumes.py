@@ -1,32 +1,37 @@
 import os
 import traceback
-from typing import List
 import tempfile
 import uuid
+from typing import List
 
-from sqlalchemy import inspect
-from sqlalchemy.orm import Session
 from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, BackgroundTasks, Query
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
 from sqlalchemy.inspection import inspect
-# --- 2. IMPORT REFACTORED UTILS AND CORRECTED SCHEMAS ---
+from pydantic import BaseModel
+
 from db import get_db
-from models import Resume, UploadJob, TempResume # Import UploadJob model
-from schemas import ResumeOut # Use the corrected output schema
-from services.upload_backend.upload import process_zip_file_for_api, initialize_vector_db
+from models import Resume, UploadJob
+from schemas import ResumeOut
+from services.upload_backend.upload import process_zip_file_for_api
 from services.serach_batch import run_search_pipeline
+from config import settings
+from utils.qdrant_client_wrapper import get_qdrant_client, setup_qdrant_collection
+from qdrant_client.models import VectorParams, Distance
+import logging
+
+logger = logging.getLogger(__name__)
+qdrant = get_qdrant_client
 
 router = APIRouter()
 
-# Initialize Vector DB on startup
+# Initialize Qdrant on startup
 @router.on_event("startup")
 def on_startup():
-    initialize_vector_db()
+    setup_qdrant_collection()
 
-# --- 3. REFACTOR UPLOAD TO BE ASYNCHRONOUS ---
+# === Upload Endpoint ===
 @router.post("/upload-resumes")
-async def upload_zip(background_tasks: BackgroundTasks, db: Session = Depends(get_db), zipfile: UploadFile = File(...), temporary: bool = Query(False)):
+async def upload_zip(background_tasks: BackgroundTasks, db: Session = Depends(get_db), zipfile: UploadFile = File(...)):
     job = UploadJob(id=str(uuid.uuid4()), status="starting", total_files=0, processed_files=0)
     db.add(job)
     db.commit()
@@ -35,11 +40,11 @@ async def upload_zip(background_tasks: BackgroundTasks, db: Session = Depends(ge
         tmp.write(await zipfile.read())
         zip_path = tmp.name
 
-    # 🔁 Pass only zip_path and job_id — NOT the db session
-    background_tasks.add_task(process_zip_file_for_api, zip_path, job.id, temporary)
+    background_tasks.add_task(process_zip_file_for_api, zip_path, job.id)
 
     return {"message": "Upload received and is being processed in the background.", "job_id": job.id}
 
+# === Upload Status ===
 @router.get("/upload-status/{job_id}")
 def upload_status(job_id: str, db: Session = Depends(get_db)):
     job = db.query(UploadJob).filter(UploadJob.id == job_id).first()
@@ -53,26 +58,13 @@ def upload_status(job_id: str, db: Session = Depends(get_db)):
         "done": job.status == "done"
     }
 
+# === Search ===
 class SearchRequest(BaseModel):
     job_description: str
     top_k: int = 10
 
-class CandidateProfile(ResumeOut): # Inherit from the corrected base schema
+class CandidateProfile(ResumeOut):
     score: float
-
-def get_candidates_from_db(db: Session, doc_ids: List[str]) -> List:
-    """
-    Helper function to fetch profiles from both TempResume and Resume tables.
-    """
-    profiles = {p.document_id: p for p in db.query(TempResume).filter(TempResume.document_id.in_(doc_ids)).all()}
-    
-    # Query the permanent table and add profiles only if they weren't in the temp table
-    permanent_profiles = db.query(Resume).filter(Resume.document_id.in_(doc_ids)).all()
-    for p in permanent_profiles:
-        if p.document_id not in profiles:
-            profiles[p.document_id] = p
-            
-    return list(profiles.values())
 
 @router.post("/search", response_model=List[CandidateProfile])
 async def search_resumes(request: SearchRequest, db: Session = Depends(get_db)):
@@ -84,11 +76,9 @@ async def search_resumes(request: SearchRequest, db: Session = Depends(get_db)):
         doc_ids = [r.id for r in search_results]
         scores_map = {r.id: round(r.score, 2) for r in search_results}
 
-        # --- CHANGE IS HERE ---
-        # Use the helper function to query both tables
-        profiles_from_db = get_candidates_from_db(db, doc_ids)
+        # Fetch from the single Resume table
+        profiles_from_db = db.query(Resume).filter(Resume.document_id.in_(doc_ids)).all()
 
-        # The rest of your logic for combining scores and creating the response is correct
         response_profiles = []
         for profile in profiles_from_db:
             profile_data = {c.key: getattr(profile, c.key) for c in inspect(profile).mapper.column_attrs}
@@ -105,17 +95,68 @@ async def search_resumes(request: SearchRequest, db: Session = Depends(get_db)):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
+# === View Single Profile ===
 @router.get("/profile/{document_id}", response_model=ResumeOut)
 async def get_profile(document_id: str, db: Session = Depends(get_db)):
-    # 1. Check the TempResume table first
-    profile = db.query(TempResume).filter(TempResume.document_id == document_id).first()
-
-    # 2. If not found, check the permanent Resume table
-    if not profile:
-        profile = db.query(Resume).filter(Resume.document_id == document_id).first()
-    
-    # 3. If still not found, then it's a 404
+    profile = db.query(Resume).filter(Resume.document_id == document_id).first()
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
-        
     return profile
+
+# === Clear All Resumes ===
+@router.delete("/clear-resumes", tags=["Admin"])
+def clear_all_resumes(db: Session = Depends(get_db)):
+    """
+    Deletes all resume records from PostgreSQL and Qdrant.
+    Re-initializes Qdrant collection to avoid downstream errors.
+    """
+    try:
+        # 1. Delete vectors from Qdrant
+        qdrant.delete_collection(settings.qdrant_collection)
+        logger.info(f"🗑️ Qdrant collection '{settings.qdrant_collection}' deleted.")
+
+        # 2. Recreate empty Qdrant collection
+        setup_qdrant_collection()
+
+        # 3. Clear all resume records from Postgres
+        deleted_rows = db.query(Resume).delete()
+        db.commit()
+        logger.info(f"🗑️ Deleted {deleted_rows} resume records from PostgreSQL.")
+
+        return {
+            "status": "success",
+            "message": "✅ All resumes cleared from PostgreSQL and Qdrant."
+        }
+
+    except Exception as e:
+        db.rollback()
+        logger.error(f"❌ Failed to clear resumes: {e}")
+        return {
+            "status": "error",
+            "message": f"❌ Failed to clear data: {str(e)}"
+        }
+
+@router.get("/admin/status")
+def get_admin_status(db: Session = Depends(get_db)):
+    qdrant = get_qdrant_client
+    try:
+        collection_info = qdrant.get_collection(settings.qdrant_collection)
+        vector_count = collection_info.vectors_count
+        qdrant_status = "🟢 Active"
+    except:
+        vector_count = "N/A"
+        qdrant_status = "🔴 Failed"
+
+    try:
+        resume_count = db.query(Resume).count()
+        db_status = "🟢 Connected"
+    except:
+        resume_count = "N/A"
+        db_status = "🔴 Failed"
+
+    return {
+        "db_status": db_status,
+        "qdrant_status": qdrant_status,
+        "vector_count": vector_count,
+        "resume_count": resume_count,
+    }
