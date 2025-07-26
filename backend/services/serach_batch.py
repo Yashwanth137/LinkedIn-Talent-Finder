@@ -38,7 +38,7 @@ prompt = load_prompt(prompt_path)
 llm = ChatGroq(
     model=GROQ_MODEL,
     temperature=0,
-    api_key=os.getenv("GROQ_API_KEY", api)
+    api_key=api
 )
 
 chain = prompt | llm | parser

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import InputPage from "./input";
 import SearchResults from "./SearchResults";
 import Dashboard from "./dashboard";
-
+import Upload from "./Upload";
 
 const TabButton = ({ tab, isActive, onClick }) => {
   const getTabStyles = useCallback((color) => ({
@@ -55,6 +55,7 @@ const TabLayout = () => {
   const navigate = useNavigate();
 
   const tabs = useMemo(() => [
+    { name: 'Upload', icon: FileText, color: 'blue' },
     { name: 'Job Description', icon: FileText, color: 'blue' },
     { name: 'Search Results', icon: Search, color: 'purple' },
     { name: 'Dashboard', icon: BarChart3, color: 'emerald' }
@@ -164,6 +165,10 @@ const TabLayout = () => {
 
       {/* ✅ Page Content */}
       <div className="flex-1 w-full">
+        {activeTab === "Upload" && (
+          <Upload onTabChange={setActiveTab} />
+        )}
+
         {activeTab === "Job Description" && (
           <InputPage
             activeTab={activeTab}
@@ -182,9 +187,9 @@ const TabLayout = () => {
         )}
 
         {activeTab === "Dashboard" && (
-          <Dashboard 
-          results={searchResults.results} 
-          userSkills={searchResults.userSkills}/>
+          <Dashboard
+            results={searchResults.results}
+            userSkills={searchResults.userSkills} />
         )}
 
       </div>

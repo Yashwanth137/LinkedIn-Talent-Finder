@@ -258,19 +258,7 @@ const Dashboard = ({ results = [], userSkills = [], topK = 10 }) => {
             </table>
           </div>
 
-          {/* 📊 Bar Chart: Match Score */}
-          <div className="w-full h-auto bg-white shadow rounded-lg p-4" style={{ minHeight: '400px' }}>
-            <h3 className="text-lg font-semibold text-emerald-700 mb-2">Match Score</h3>
-            <ResponsiveContainer width="100%" height={Math.max(barData.length * 40 + 60, 340)}>
-              <BarChart data={barData} layout="vertical" margin={{ left: 50, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" domain={[0, 100]} />
-                <YAxis dataKey="name" type="category" width={80} interval={0} />
-                <Tooltip cursor={{ fill: '#f0fdf4' }} />
-                <Bar dataKey="score" fill={colors.ideal} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          
         </>
       )}
     </div>
