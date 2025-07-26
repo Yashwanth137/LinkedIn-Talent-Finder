@@ -22,4 +22,8 @@ langchain-core
 langchain-ollama
 langchain-community  
 
+langchain-groq
+InstructorEmbedding
 apscheduler
+
+
