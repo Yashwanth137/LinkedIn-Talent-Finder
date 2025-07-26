@@ -1,30 +1,37 @@
-from sqlalchemy.orm import Session
+import logging
 from datetime import datetime, timedelta
-from models import TempResume
-from qdrant_client import QdrantClient
+from sqlalchemy.orm import Session
 from config import settings
+from models import Resume
+from utils.qdrant_client_wrapper import get_qdrant_client
 
-def cleanup_expired_temp_resumes(db: Session):
+# === Logger Setup ===
+logger = logging.getLogger(__name__)
+
+def cleanup_expired_resumes(db: Session):
+    """
+    Delete resumes older than 24 hours from both PostgreSQL and Qdrant.
+    """
     expiry_threshold = datetime.utcnow() - timedelta(hours=24)
 
-    expired = db.query(TempResume).filter(TempResume.created_at < expiry_threshold).all()
-
-    if not expired:
-        print("✅ No expired resumes to clean.")
+    expired_resumes = db.query(Resume).filter(Resume.created_at < expiry_threshold).all()
+    if not expired_resumes:
+        logger.info("✅ No expired resumes to clean.")
         return
 
-    qdrant = QdrantClient(url=settings.qdrant_host)
-
-    for resume in expired:
+    for resume in expired_resumes:
         try:
-            qdrant.delete(
-                collection_name="temp_resumes",
+            get_qdrant_client.delete(
+                collection_name=settings.qdrant_collection,
                 points_selector={"points": [resume.document_id]}
             )
         except Exception as e:
-            print(f"❌ Failed to delete vector for {resume.document_id}: {e}")
+            logger.error(f"❌ Failed to delete vector for {resume.document_id}: {e}")
 
-    db.query(TempResume).filter(TempResume.created_at < expiry_threshold).delete()
-    db.commit()
-
-    print(f"✅ Cleaned up {len(expired)} expired temp resumes.")
+    try:
+        db.query(Resume).filter(Resume.created_at < expiry_threshold).delete(synchronize_session=False)
+        db.commit()
+        logger.info(f"✅ Cleaned up {len(expired_resumes)} expired resumes.")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"❌ Failed to delete expired resumes from DB: {e}")
