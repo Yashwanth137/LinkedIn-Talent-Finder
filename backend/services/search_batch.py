@@ -1,6 +1,5 @@
 import os
 import json
-import logging
 from typing import List
 from pydantic import BaseModel, Field
 from langchain.output_parsers import PydanticOutputParser

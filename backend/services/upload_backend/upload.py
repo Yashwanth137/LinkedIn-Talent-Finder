@@ -7,7 +7,6 @@ import traceback
 import hashlib
 from pathlib import Path
 import json
-import logging
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session

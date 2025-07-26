@@ -13,7 +13,7 @@ AI-powered resume ranking and matching system that allows users to upload resume
 * 📊 Admin dashboard with radar chart and summary stats
 * 🧼 Duplicate detection and skipped file handling
 * 🔐 JWT-based authentication
-* 🎨 Beautiful frontend with React + Tailwind CSS
+* 🎨 Frontend with React + Tailwind CSS
 
 ---
 
