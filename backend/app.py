@@ -10,6 +10,7 @@ from routes import resumes
 
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
+from utils.logger import logger
 
 # === Initialize FastAPI ===
 app = FastAPI(title="Talent Finder API")
@@ -28,7 +29,7 @@ app.add_middleware(
 def startup_event():
     Base.metadata.create_all(bind=engine)
     setup_qdrant_collection()
-    print("PostgreSQL tables and Qdrant collection initialized.")
+    logger.info("PostgreSQL tables and Qdrant collection initialized.")
 
     # Schedule background cleanup for expired temporary resumes
     scheduler = BackgroundScheduler()
@@ -40,7 +41,7 @@ def startup_event():
     scheduler.start()
 
     atexit.register(lambda: scheduler.shutdown(wait=False))
-    print("Background cleanup scheduler started.")
+    logger.info("Background cleanup scheduler started.")
 
 # === Manual Resume Cleanup Endpoint ===
 @app.delete("/temp-cleanup", tags=["Admin"])

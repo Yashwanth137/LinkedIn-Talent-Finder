@@ -13,21 +13,15 @@ from db import get_db
 from models import Resume, UploadJob
 from schemas import ResumeOut
 from services.upload_backend.upload import process_zip_file_for_api
-from services.serach_batch import run_search_pipeline
+from services.search_batch import run_search_pipeline
 from config import settings
-from utils.qdrant_client_wrapper import get_qdrant_client, setup_qdrant_collection
+from utils.qdrant_client_wrapper import qdrant_client
 from qdrant_client.models import VectorParams, Distance
-import logging
+from utils.logger import logger
 
-logger = logging.getLogger(__name__)
-qdrant = get_qdrant_client
+qdrant = qdrant_client
 
 router = APIRouter()
-
-# Initialize Qdrant on startup
-@router.on_event("startup")
-def on_startup():
-    setup_qdrant_collection()
 
 # === Upload Endpoint ===
 @router.post("/upload-resumes")
@@ -114,10 +108,10 @@ def clear_all_resumes(db: Session = Depends(get_db)):
         # 1. Delete vectors from Qdrant
         qdrant.delete_collection(settings.qdrant_collection)
         logger.info(f"🗑️ Qdrant collection '{settings.qdrant_collection}' deleted.")
-
-        # 2. Recreate empty Qdrant collection
-        setup_qdrant_collection()
-
+        #2. Delete all upload jobs
+        db.query(UploadJob).delete()
+        db.commit()
+        logger.info("🧹 UploadJob table cleared.")
         # 3. Clear all resume records from Postgres
         deleted_rows = db.query(Resume).delete()
         db.commit()
@@ -138,7 +132,6 @@ def clear_all_resumes(db: Session = Depends(get_db)):
 
 @router.get("/admin/status")
 def get_admin_status(db: Session = Depends(get_db)):
-    qdrant = get_qdrant_client
     try:
         collection_info = qdrant.get_collection(settings.qdrant_collection)
         vector_count = collection_info.vectors_count

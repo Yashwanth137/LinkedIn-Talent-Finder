@@ -17,30 +17,23 @@ from models import UploadJob, Resume
 
 from langchain.prompts import load_prompt
 from langchain_groq import ChatGroq
-from InstructorEmbedding import INSTRUCTOR
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader
 
-from utils.qdrant_client_wrapper import get_qdrant_client, setup_qdrant_collection
+from utils.qdrant_client_wrapper import qdrant_client
 from qdrant_client.models import PointStruct
-
-# === Logging Setup ===
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] - %(message)s",
-)
-logger = logging.getLogger(__name__)
+from utils.logger import logger
+from utils.model_loader import model
 
 # === Constants ===
 PROMPT_FILE = Path(__file__).parent / "prompt.json"
 api_keys = [settings.api1, settings.api2]
 
 # === Embedding & LLM Setup ===
-embedder = INSTRUCTOR("hkunlp/instructor-large")
+embedder = model
 prompt = load_prompt(PROMPT_FILE)
 parser = JsonOutputParser()
-qdrant = get_qdrant_client
-setup_qdrant_collection()
+qdrant = qdrant_client
 
 def create_llm(api_key: str):
     return ChatGroq(model="llama-3.3-70b-versatile", api_key=api_key)

@@ -65,7 +65,6 @@ const TabLayout = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
-      console.log("Token being sent:", token); // ✅ Confirm in console
 
       if (!token) return;
 
@@ -77,8 +76,7 @@ const TabLayout = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log("User data:", data);
-        setUser(data); // or whatever state you're using
+        setUser(data); 
       } else {
         console.error("Auth failed:", await res.text());
       }

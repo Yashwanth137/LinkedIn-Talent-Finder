@@ -4,7 +4,6 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, Text, Float, ARRAY, DateTime
 from db import Base
 
-
 class User(Base):
     __tablename__ = "users"
 

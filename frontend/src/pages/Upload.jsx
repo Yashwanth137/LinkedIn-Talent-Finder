@@ -167,11 +167,11 @@ export default function Upload({ onTabChange }) {
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">🔧 Overview</h3>
                 <div className="space-y-2 text-gray-700">
                     <div className="flex items-center gap-3">
-                        <Server className="w-5 h-5 text-blue-500" />
+                        <Server className="w-4 h-4 text-blue-500" />
                         Qdrant: <span className="font-medium">{qdrantStatus}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                        <DatabaseZap className="w-5 h-5 text-green-500" />
+                        <DatabaseZap className="w-4 h-4 text-green-500" />
                         PostgreSQL: <span className="font-medium">{dbStatus}</span>
                     </div>
                     <div>
