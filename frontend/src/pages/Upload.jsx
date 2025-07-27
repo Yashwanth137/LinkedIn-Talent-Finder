@@ -110,7 +110,7 @@ export default function Upload({ onTabChange }) {
             console.error(err);
         }
     };
-    
+
     const handleManualClear = async () => {
         if (!window.confirm("Are you sure you want to delete all uploaded resumes?")) return;
         try {
@@ -183,6 +183,14 @@ export default function Upload({ onTabChange }) {
                     >
                         🗑️ Clear All Resumes
                     </button>
+                    <a
+                        href="https://talentfinderdocs.netlify.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-center text-sm mt-3 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md w-full"
+                    >
+                        📘 View Docs
+                    </a>
                 </div>
             </div>
 
@@ -195,7 +203,7 @@ export default function Upload({ onTabChange }) {
                     </h2>
                     <p className="text-gray-600 text-m">
                         Upload a ZIP file containing resumes. The system will process them, extract text, and skip any duplicates.
-                         Data will auto-delete in 24 hours. You can manually delete from the Overview.
+                        Data will auto-delete in 24 hours. You can manually delete from the Overview.
                     </p>
                     <div
                         onDrop={handleDrop}
@@ -221,7 +229,7 @@ export default function Upload({ onTabChange }) {
                             }}
                             className="hidden"
                         />
-                         <label htmlFor="file-upload" className="mt-2 cursor-pointer text-sm font-semibold text-blue-700 bg-blue-100 hover:bg-blue-200 py-2 px-4 rounded-full">
+                        <label htmlFor="file-upload" className="mt-2 cursor-pointer text-sm font-semibold text-blue-700 bg-blue-100 hover:bg-blue-200 py-2 px-4 rounded-full">
                             Browse File
                         </label>
                         {file && <p className="text-sm text-gray-600 mt-2">Selected: {file.name}</p>}
