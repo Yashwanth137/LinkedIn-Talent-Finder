@@ -97,8 +97,8 @@ const LoginRegisterPage = () => {
           <form onSubmit={handleFormSubmit} className="bg-white h-full flex justify-center items-center flex-col px-10 text-center">
             <h1 className="font-extrabold text-4xl mb-2">Sign in</h1>
             <p className="text-sm text-gray-500 mb-4">with your HR credentials</p>
-            <input name="email" className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" />
-            <input name="password" className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" />
+            <input name="email" className="bg-gray-200 border-none p-3 my-2 w-full" type="email" placeholder="Email" autoComplete="username"/>
+            <input name="password" className="bg-gray-200 border-none p-3 my-2 w-full" type="password" placeholder="Password" autoComplete="current-password"/>
             <a href="#" className="text-sm my-3">Forgot your password?</a>
             <button type="submit" className="rounded-full border border-[#FF4B2B] bg-[#FF4B2B] text-white text-xs font-bold py-3 px-12 uppercase tracking-wider transition-transform duration-75 ease-in active:scale-95">
               Sign In

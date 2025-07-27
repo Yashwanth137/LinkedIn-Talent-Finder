@@ -9,9 +9,6 @@ AI-powered resume ranking and matching system that allows users to upload resume
 * 📄 Upload and parse resumes (PDF/DOCX)
 * 🤖 AI-powered semantic search (Instructor model)
 * 🔍 Top-k matching resumes with similarity scores
-* 🧰 Filters: experience, skills, location
-* 📊 Admin dashboard with radar chart and summary stats
-* 🧼 Duplicate detection and skipped file handling
 * 🔐 JWT-based authentication
 * 🎨 Frontend with React + Tailwind CSS
 
@@ -108,7 +105,7 @@ uvicorn app:app --reload
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run start
 ```
 
 ---
@@ -122,12 +119,11 @@ npm run dev
 Authorization: Bearer <token>
 ```
 
-## 🧠 AI Smart Search
+## 📄 Documentation
 
-* Input job description + top-k value
-* Backend returns semantically matched resumes
-* Filters include:
+📘 [Read the full documentation](https://talentfinderdocs.netlify.app/)
 
-  * Minimum experience
-  * Required skills
-* Search Results page shows ranked list with scores
+Includes setup, API reference, models, and usage instructions.
+
+📄 License
+MIT License
